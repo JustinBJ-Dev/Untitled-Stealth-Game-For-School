@@ -1,5 +1,10 @@
 [gd_scene format=3 uid="uid://b2huk5v86713o"]
 
+[ext_resource type="Script" uid="uid://b5qpi8vy6ami1" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://blokt4d45eotq" path="res://StateMachine/StataMachine.gd" id="2_i3pqv"]
+[ext_resource type="Script" uid="uid://6dmsxuouamqr" path="res://player_idle.gd" id="3_hqtel"]
+[ext_resource type="Script" uid="uid://7v4xouta2cxc" path="res://player_run.gd" id="4_sweqy"]
+
 [sub_resource type="PrismMesh" id="PrismMesh_p7o00"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t5fij"]
@@ -7,6 +12,7 @@ radius = 8.0
 height = 16.0
 
 [node name="player" type="CharacterBody2D" unique_id=1967735014]
+script = ExtResource("1_onrkg")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1059612354]
 scale = Vector2(32, 32)
@@ -15,3 +21,16 @@ mesh = SubResource("PrismMesh_p7o00")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1875369770]
 position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_t5fij")
+
+[node name="StateMachine" type="Node" parent="." unique_id=557996560]
+script = ExtResource("2_i3pqv")
+metadata/_custom_type_script = "uid://blokt4d45eotq"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1225486931 node_paths=PackedStringArray("player_")]
+script = ExtResource("3_hqtel")
+player_ = NodePath("../..")
+metadata/_custom_type_script = "uid://dsf7qrj7tkjvj"
+
+[node name="Run" type="Node" parent="StateMachine" unique_id=1439257435]
+script = ExtResource("4_sweqy")
+metadata/_custom_type_script = "uid://dsf7qrj7tkjvj"
