@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b2huk5v86713o"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_p7o00"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t5fij"]
+radius = 8.0
+height = 16.0
+
+[node name="player" type="CharacterBody2D" unique_id=1967735014]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1059612354]
+scale = Vector2(32, 32)
+mesh = SubResource("PrismMesh_p7o00")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1875369770]
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_t5fij")
