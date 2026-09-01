@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://unfnr5bqlyaj"]
+
+[ext_resource type="Script" uid="uid://xieq3na4dp1i" path="res://test_enemy.gd" id="1_ghv5c"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_p7o00"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p7o00"]
+radius = 16.0
+
+[node name="testEnemy" type="CharacterBody2D" unique_id=1369649150 node_paths=PackedStringArray("nav2d")]
+script = ExtResource("1_ghv5c")
+nav2d = NodePath("NavigationAgent2D")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=943960601]
+scale = Vector2(32.53629, 32.500008)
+mesh = SubResource("SphereMesh_p7o00")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1860920870]
+shape = SubResource("CircleShape2D_p7o00")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=143890723]
+path_desired_distance = 2.0
+debug_enabled = true

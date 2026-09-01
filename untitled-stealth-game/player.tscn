@@ -7,6 +7,8 @@
 
 [sub_resource type="PrismMesh" id="PrismMesh_p7o00"]
 
+[sub_resource type="PrismMesh" id="PrismMesh_pj23d"]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t5fij"]
 radius = 8.0
 height = 32.0
@@ -15,11 +17,20 @@ height = 32.0
 script = ExtResource("1_onrkg")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1059612354]
-scale = Vector2(40, 48.000004)
+position = Vector2(19.999998, 0)
+rotation = -1.5707964
+scale = Vector2(40, 40.000004)
 mesh = SubResource("PrismMesh_p7o00")
 
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="." unique_id=1407699166]
+position = Vector2(-4.9368896, 4.095275e-08)
+rotation = -1.5707964
+scale = Vector2(39.999996, -9.873779)
+mesh = SubResource("PrismMesh_pj23d")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1875369770]
-position = Vector2(0, -8)
+position = Vector2(12, 0)
+rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_t5fij")
 
 [node name="StateMachine" type="Node" parent="." unique_id=557996560 node_paths=PackedStringArray("initail_state")]

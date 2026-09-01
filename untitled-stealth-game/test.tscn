@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://bccm00g6m5xoe"]
 
 [ext_resource type="PackedScene" uid="uid://b2huk5v86713o" path="res://player.tscn" id="1_37kl0"]
+[ext_resource type="PackedScene" uid="uid://unfnr5bqlyaj" path="res://test_enemy.tscn" id="2_8uh7m"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_37kl0"]
+vertices = PackedVector2Array(666, 530, 1142.1172, 638, 10, 638, 590, 530, 1149.8828, 10, 666, 110, 10, 10, 590, 110)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(3, 2, 6, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, 0, 1160, 0, 1152, 648, 0, 648), PackedVector2Array(600, 520, 656, 520, 656, 120, 600, 120)])
 
 [sub_resource type="QuadMesh" id="QuadMesh_hxrvi"]
 
@@ -8,6 +14,9 @@
 size = Vector2(40, 384)
 
 [node name="Test" type="Node2D" unique_id=1374419755]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=900439969]
+navigation_polygon = SubResource("NavigationPolygon_37kl0")
 
 [node name="player" parent="." unique_id=1967735014 instance=ExtResource("1_37kl0")]
 position = Vector2(168, 144)
@@ -23,3 +32,7 @@ mesh = SubResource("QuadMesh_hxrvi")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=438196707]
 position = Vector2(20, 192)
 shape = SubResource("RectangleShape2D_p7o00")
+
+[node name="testEnemy" parent="." unique_id=1369649150 node_paths=PackedStringArray("target") instance=ExtResource("2_8uh7m")]
+position = Vector2(872, 280)
+target = NodePath("../player")

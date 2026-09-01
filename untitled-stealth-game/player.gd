@@ -11,5 +11,6 @@ func _process(delta):
 	
 
 func _physics_process(delta: float) -> void:
-
+	self.look_at(global_position + velocity)
+	
 	move_and_slide()
