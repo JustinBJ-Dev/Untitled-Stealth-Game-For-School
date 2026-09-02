@@ -5,10 +5,11 @@ extends EnemyState
 @export var detectionCast : RayCast2D
 
 var navTimer : Timer
+@export var naviagation_timer_wait_time : float = 0.1
 
 func _ready() -> void:
 	navTimer = Timer.new()
-	navTimer.set_wait_time(0.5)
+	navTimer.set_wait_time(naviagation_timer_wait_time)
 	add_child(navTimer)
 	navTimer.timeout.connect(navTimeout)
 

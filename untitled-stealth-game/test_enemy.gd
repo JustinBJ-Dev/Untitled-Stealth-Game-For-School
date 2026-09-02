@@ -13,9 +13,9 @@ func _ready() -> void:
 	player_node = get_tree().get_first_node_in_group("player")
 
 func _physics_process(delta: float) -> void:
+	
 	detectionCast.target_position = player_node.global_position - self.global_position
 	detect_player()
-	print(target)
 	navigation(delta)
 	move_and_slide()
 

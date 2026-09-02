@@ -35,13 +35,15 @@ func _ready() -> void:
 func enter_state() -> void:
 	navTimer.start()
 	
-	target_point = Marker2D.new()
-	add_child(target_point)
+	if enemy_.global_position.distance_to(pathPosition) >= enemy_.global_position.distance_to(partolPath.get_point_position(partolPath.get_closest_point(enemy_.global_position))):
+		#If the last position on the path is closer than the closet point, the enemy will go the last position on the graph.
+		
+		current_point_number = partolPath.get_closest_point(enemy_.global_position)
+		current_point_position = partolPath.get_point_position(current_point_number)
+		next_point_number = partolPath.get_next_point(current_point_number)
+		pathPosition = current_point_position
 	
-	current_point_number = partolPath.get_closest_point(enemy_.global_position)
-	current_point_position = partolPath.get_point_position(current_point_number)
-	next_point_number = partolPath.get_next_point(current_point_number)
-	pathPosition = current_point_position
+	
 
 func physics_update(delta: float) -> void:
 	is_detecting_player()
@@ -50,9 +52,11 @@ func physics_update(delta: float) -> void:
 	set_path_position()
 	detect_is_at_point()
 
-func detect_is_on_path() ->void: #Detects if the enemy is current on the path
+func detect_is_on_path() -> void: #Detects if the enemy is current on the path
 	if enemy_.global_position.distance_to(pathPosition) <= 10:
 		onPath = true
+	else:
+		onPath = false
 
 func set_path_position() -> void: #Sets the pathPosition as the current_point_position if the enemy is onPath
 	if onPath:
@@ -79,8 +83,8 @@ func handle_path() -> void:
 func is_detecting_player() -> void:
 	if enemy_.is_detecting_player == true:
 		switch_state.emit(Chasing)
-	else:
-		return
 
 func exit_state() -> void:
 	navTimer.stop()
+	onPath = false
+	

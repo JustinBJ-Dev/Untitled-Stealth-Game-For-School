@@ -9,7 +9,6 @@ func get_path_points(): ##Fills path_point with every point on the line2d, and g
 	for i in get_parent().points: #Loop that fills path_points
 		path_points[digit] = i #Assigns each point a key and a position corresponding to the key
 		digit += 1  #Adds one for the next point in path_points
-	print(path_points)
 
 func get_next_point(current : int): ##Gets the next point in path_points
 	var next_point #Contian the next point
