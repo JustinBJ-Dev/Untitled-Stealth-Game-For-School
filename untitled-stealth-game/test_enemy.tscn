@@ -22,7 +22,7 @@ mesh = SubResource("SphereMesh_p7o00")
 shape = SubResource("CircleShape2D_p7o00")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=143890723]
-path_desired_distance = 2.0
+path_desired_distance = 5.0
 debug_enabled = true
 
 [node name="StateMachine" type="Node" parent="." unique_id=437612346 node_paths=PackedStringArray("initail_state")]
@@ -30,12 +30,18 @@ script = ExtResource("2_x4eh8")
 initail_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://blokt4d45eotq"
 
-[node name="Chasing" type="Node" parent="StateMachine" unique_id=617698607 node_paths=PackedStringArray("parent")]
+[node name="Chasing" type="Node" parent="StateMachine" unique_id=617698607 node_paths=PackedStringArray("Idle", "detectionCast", "parent")]
 script = ExtResource("3_jg7vu")
+Idle = NodePath("../Idle")
+detectionCast = NodePath("../../detectionCast")
 parent = NodePath("../..")
 metadata/_custom_type_script = "uid://bww1i0uvfgc1w"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=41667267 node_paths=PackedStringArray("enemy_")]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=41667267 node_paths=PackedStringArray("Chasing", "detectionCast", "enemy_")]
 script = ExtResource("4_iajr3")
+Chasing = NodePath("../Chasing")
+detectionCast = NodePath("../../detectionCast")
 enemy_ = NodePath("../..")
 metadata/_custom_type_script = "uid://b5lqognjyej6y"
+
+[node name="detectionCast" type="RayCast2D" parent="." unique_id=1666046053]

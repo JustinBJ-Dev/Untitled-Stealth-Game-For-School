@@ -1,5 +1,9 @@
 extends State
 
+@export_category("States")
+@export var Idle : State
+@export var detectionCast : RayCast2D
+
 var navTimer : Timer
 
 func enter_state() -> void:

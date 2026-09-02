@@ -9,6 +9,7 @@ func get_path_points(): ##Fills path_point with every point on the line2d, and g
 	for i in get_parent().points: #Loop that fills path_points
 		path_points[digit] = i #Assigns each point a key and a position corresponding to the key
 		digit += 1  #Adds one for the next point in path_points
+	print(path_points)
 
 func get_next_point(current : int): ##Gets the next point in path_points
 	var next_point #Contian the next point
@@ -23,10 +24,10 @@ func get_closest_point(point : Vector2): ##Gets closest point from path_points t
 	
 	for i in path_points: ##Loop that cycles through path_points and returns the closest
 		var path_point = path_points[i] #Get a speific point from path_points
-		#print(i, " i  ", path_point)
+		
 		if (point - path_point).length() < length_to_point: #Determines which point is the closest
-			#print(i, " 1 ", (point - path_point).length())
-			length_to_point = (point - path_point).length()
+			
+			length_to_point = (point - path_point).length() #Sets length_to_point as the closet point to 
 			closest_point = i
 	return closest_point #returns the closest point
 

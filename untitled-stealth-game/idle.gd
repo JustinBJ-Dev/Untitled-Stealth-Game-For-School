@@ -11,6 +11,12 @@ var current_point_position : Vector2 #Contains the position of the current point
 var current_point_number : int = 0 #Contains the current point on the path
 var next_point_number : int #Contains the next point on the path
 
+@export var naviagation_timer_wait_time : float = 0.1
+
+@export_category("States")
+@export var Chasing : State
+@export var detectionCast : RayCast2D
+
 func _ready() -> void:
 	partolPath = enemy_.partol_path
 	partolPath.get_path_points()
@@ -18,7 +24,7 @@ func _ready() -> void:
 
 func enter_state() -> void:
 	navTimer = Timer.new()
-	navTimer.set_wait_time(0.25)
+	navTimer.set_wait_time(naviagation_timer_wait_time)
 	add_child(navTimer)
 	navTimer.timeout.connect(navTimeout)
 	navTimer.start()
@@ -32,19 +38,24 @@ func enter_state() -> void:
 	pathPosition = current_point_position
 
 func physics_update(delta: float) -> void:
-	if enemy_.global_position.x >= pathPosition.x - 5 && enemy_.global_position.x <= pathPosition.x + 5:
-		if enemy_.global_position.y >= pathPosition.y - 5 && enemy_.global_position.y <= pathPosition.y + 5:
-			onPath = true
 	
+	detect_is_on_path()
+	set_path_position()
+	detect_is_at_point()
+
+func detect_is_on_path() ->void: #Detects if the enemy is current on the path
+	if enemy_.global_position.distance_to(pathPosition) <= 10:
+		onPath = true
+
+func set_path_position() -> void: #Sets the pathPosition as the current_point_position if the enemy is onPath
 	if onPath:
-		print(current_point_number)
 		current_point_position = partolPath.get_point_position(current_point_number)
-		pathPosition = current_point_position
-	
-	if enemy_.global_position.x >= current_point_position.x - 5 && enemy_.global_position.x <= current_point_position.x + 5: # -5<x<5  Check if the characters x value is within ten pixelx of the current_point_position.x 
-		if enemy_.global_position.y >= current_point_position.y - 5 && enemy_.global_position.y <= current_point_position.y + 5: # -5<y<5  Check if the characters y value is within ten pixel of the current_point_position.x
-			current_point_number = next_point_number
-			next_point_number = partolPath.get_next_point(current_point_number)
+		pathPosition = enemy_.global_position
+
+func  detect_is_at_point() -> void: #Detect if the enemy is at a the current point, and sets next point if it is
+	if enemy_.global_position.distance_to(current_point_position) <= 10:
+		current_point_number = next_point_number
+		next_point_number = partolPath.get_next_point(current_point_number)
 
 func navTimeout():
 	handle_path()
@@ -60,3 +71,4 @@ func handle_path() -> void:
 
 func exit_state() -> void:
 	navTimer.queue_free()
+	target_point.queue_free()

@@ -37,8 +37,8 @@ shape = SubResource("RectangleShape2D_p7o00")
 
 [node name="Partol" type="Line2D" parent="." unique_id=1581658198]
 position = Vector2(-8, 0)
-points = PackedVector2Array(1088, 40, 960, 320, 896, 320, 736, 136, 872, 48)
-width = 5.0
+points = PackedVector2Array(1024, 192, 768, 192, 768, 576, 520, 576, 520, 192, 200, 192, 520, 192, 520, 576, 768, 576, 768, 192, 1024, 192)
+width = 1.0
 script = ExtResource("2_ppyta")
 debug = true
 metadata/_custom_type_script = "uid://h4i2gpigi1o7"
@@ -46,6 +46,6 @@ metadata/_custom_type_script = "uid://h4i2gpigi1o7"
 [node name="PartolLogic" parent="Partol" unique_id=835768422 instance=ExtResource("3_ykrsh")]
 
 [node name="testEnemy" parent="Partol/PartolLogic" unique_id=1369649150 node_paths=PackedStringArray("partol_path", "target") instance=ExtResource("2_8uh7m")]
-position = Vector2(872, 56)
+position = Vector2(312, 424)
 partol_path = NodePath("..")
 target = NodePath("../../../player")
