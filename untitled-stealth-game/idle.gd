@@ -29,7 +29,7 @@ func _ready() -> void:
 	partolPath = enemy_.partol_path
 	partolPath.get_path_points()
 	
-	current_point_number = partolPath.get_closest_point(enemy_.global_position)
+	
 	pass
 
 func enter_state() -> void:
@@ -38,7 +38,7 @@ func enter_state() -> void:
 	target_point = Marker2D.new()
 	add_child(target_point)
 	
-	
+	current_point_number = partolPath.get_closest_point(enemy_.global_position)
 	current_point_position = partolPath.get_point_position(current_point_number)
 	next_point_number = partolPath.get_next_point(current_point_number)
 	pathPosition = current_point_position
