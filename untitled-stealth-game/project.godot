@@ -22,7 +22,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Partol Points Plugin/plugin.cfg")
+enabled=PackedStringArray("res://addons/Partol Points Plugin/plugin.cfg", "res://addons/project_time/plugin.cfg")
 
 [input]
 
