@@ -17,8 +17,15 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/mode=2
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Partol Points Plugin/plugin.cfg", "res://addons/project_time/plugin.cfg")
+
+[global_group]
+
+player=""
 
 [input]
 

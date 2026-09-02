@@ -13,7 +13,7 @@
 radius = 8.0
 height = 32.0
 
-[node name="player" type="CharacterBody2D" unique_id=1967735014]
+[node name="player" type="CharacterBody2D" unique_id=1967735014 groups=["player"]]
 script = ExtResource("1_onrkg")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1059612354]

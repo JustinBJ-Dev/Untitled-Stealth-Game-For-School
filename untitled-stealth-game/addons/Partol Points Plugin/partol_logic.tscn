@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d2gkci8gyruaw"]
+
+[ext_resource type="Script" uid="uid://llhw48b2vrei" path="res://addons/Partol Points Plugin/Partol logic.gd" id="1_1pt3k"]
+
+[node name="PartolLogic" type="Node2D" unique_id=835768422]
+script = ExtResource("1_1pt3k")
