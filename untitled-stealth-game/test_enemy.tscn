@@ -10,9 +10,10 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_p7o00"]
 radius = 16.0
 
-[node name="testEnemy" type="CharacterBody2D" unique_id=1369649150 node_paths=PackedStringArray("nav2d")]
+[node name="testEnemy" type="CharacterBody2D" unique_id=1369649150 node_paths=PackedStringArray("nav2d", "detectionCast")]
 script = ExtResource("1_ghv5c")
 nav2d = NodePath("NavigationAgent2D")
+detectionCast = NodePath("detectionCast")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=943960601]
 scale = Vector2(32.53629, 32.500008)
@@ -27,13 +28,14 @@ debug_enabled = true
 
 [node name="StateMachine" type="Node" parent="." unique_id=437612346 node_paths=PackedStringArray("initail_state")]
 script = ExtResource("2_x4eh8")
-initail_state = NodePath("Idle")
+initail_state = NodePath("Chasing")
 metadata/_custom_type_script = "uid://blokt4d45eotq"
 
-[node name="Chasing" type="Node" parent="StateMachine" unique_id=617698607 node_paths=PackedStringArray("Idle", "detectionCast", "parent")]
+[node name="Chasing" type="Node" parent="StateMachine" unique_id=617698607 node_paths=PackedStringArray("Idle", "detectionCast", "enemy_", "parent")]
 script = ExtResource("3_jg7vu")
 Idle = NodePath("../Idle")
 detectionCast = NodePath("../../detectionCast")
+enemy_ = NodePath("../..")
 parent = NodePath("../..")
 metadata/_custom_type_script = "uid://bww1i0uvfgc1w"
 

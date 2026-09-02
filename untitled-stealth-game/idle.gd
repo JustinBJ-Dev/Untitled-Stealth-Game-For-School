@@ -18,26 +18,33 @@ var next_point_number : int #Contains the next point on the path
 @export var detectionCast : RayCast2D
 
 func _ready() -> void:
-	partolPath = enemy_.partol_path
-	partolPath.get_path_points()
-	pass
-
-func enter_state() -> void:
 	navTimer = Timer.new()
 	navTimer.set_wait_time(naviagation_timer_wait_time)
 	add_child(navTimer)
 	navTimer.timeout.connect(navTimeout)
+	
+	target_point = Marker2D.new()
+	add_child(target_point)
+	
+	partolPath = enemy_.partol_path
+	partolPath.get_path_points()
+	
+	current_point_number = partolPath.get_closest_point(enemy_.global_position)
+	pass
+
+func enter_state() -> void:
 	navTimer.start()
 	
 	target_point = Marker2D.new()
 	add_child(target_point)
 	
-	current_point_number = partolPath.get_closest_point(enemy_.global_position)
+	
 	current_point_position = partolPath.get_point_position(current_point_number)
 	next_point_number = partolPath.get_next_point(current_point_number)
 	pathPosition = current_point_position
 
 func physics_update(delta: float) -> void:
+	is_detecting_player()
 	
 	detect_is_on_path()
 	set_path_position()
@@ -69,6 +76,11 @@ func handle_path() -> void:
 	
 	enemy_.target = target_point
 
+func is_detecting_player() -> void:
+	if enemy_.is_detecting_player == true:
+		switch_state.emit(Chasing)
+	else:
+		return
+
 func exit_state() -> void:
-	navTimer.queue_free()
-	target_point.queue_free()
+	navTimer.stop()

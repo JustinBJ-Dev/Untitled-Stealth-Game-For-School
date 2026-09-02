@@ -23,6 +23,10 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/Partol Points Plugin/plugin.cfg", "res://addons/project_time/plugin.cfg")
 
+[global_group]
+
+player=""
+
 [input]
 
 input_up={

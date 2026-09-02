@@ -4,13 +4,27 @@ extends CharacterBody2D
 @export var nav2d : NavigationAgent2D
 @export var partol_path : Partol_Path
 @export var target : Node2D
+@export var detectionCast : RayCast2D
+var is_detecting_player : bool = false
 var navTimer : Timer
+var player_node : player
 
-
+func _ready() -> void:
+	player_node = get_tree().get_first_node_in_group("player")
 
 func _physics_process(delta: float) -> void:
+	detectionCast.target_position = player_node.global_position - self.global_position
+	detect_player()
+	print(target)
 	navigation(delta)
 	move_and_slide()
+
+func detect_player() -> void:
+	if detectionCast.is_colliding() == true:
+		if detectionCast.get_collider() == player_node:
+			is_detecting_player = true
+		else:
+			is_detecting_player = false
 
 func set_target() -> void:
 	nav2d.target_position = target.global_position
