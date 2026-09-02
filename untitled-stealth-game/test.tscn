@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://b2huk5v86713o" path="res://player.tscn" id="1_37kl0"]
 [ext_resource type="PackedScene" uid="uid://unfnr5bqlyaj" path="res://test_enemy.tscn" id="2_8uh7m"]
+[ext_resource type="Script" uid="uid://h4i2gpigi1o7" path="res://addons/Partol Points Plugin/Partol.gd" id="2_ppyta"]
+[ext_resource type="PackedScene" uid="uid://d2gkci8gyruaw" path="res://addons/Partol Points Plugin/partol_logic.tscn" id="3_ykrsh"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_37kl0"]
 vertices = PackedVector2Array(666, 530, 1142.1172, 638, 10, 638, 590, 530, 1149.8828, 10, 666, 110, 10, 10, 590, 110)
@@ -33,6 +35,17 @@ mesh = SubResource("QuadMesh_hxrvi")
 position = Vector2(20, 192)
 shape = SubResource("RectangleShape2D_p7o00")
 
-[node name="testEnemy" parent="." unique_id=1369649150 node_paths=PackedStringArray("target") instance=ExtResource("2_8uh7m")]
-position = Vector2(872, 280)
-target = NodePath("../player")
+[node name="Partol" type="Line2D" parent="." unique_id=1581658198]
+position = Vector2(-8, 0)
+points = PackedVector2Array(1088, 40, 960, 320, 896, 320, 736, 136, 872, 48)
+width = 5.0
+script = ExtResource("2_ppyta")
+debug = true
+metadata/_custom_type_script = "uid://h4i2gpigi1o7"
+
+[node name="PartolLogic" parent="Partol" unique_id=835768422 instance=ExtResource("3_ykrsh")]
+
+[node name="testEnemy" parent="Partol/PartolLogic" unique_id=1369649150 node_paths=PackedStringArray("partol_path", "target") instance=ExtResource("2_8uh7m")]
+position = Vector2(872, 56)
+partol_path = NodePath("..")
+target = NodePath("../../../player")

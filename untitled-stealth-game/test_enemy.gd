@@ -1,17 +1,12 @@
+class_name enemy
 extends CharacterBody2D
 
 @export var nav2d : NavigationAgent2D
+@export var partol_path : Partol_Path
 @export var target : Node2D
 var navTimer : Timer
 
-func _ready() -> void:
-	navTimer = Timer.new()
-	navTimer.set_wait_time(0.5)
-	add_child(navTimer)
-	navTimer.timeout.connect(navTimeout)
-	navTimer.start()
-	
-	set_target()
+
 
 func _physics_process(delta: float) -> void:
 	navigation(delta)
@@ -27,7 +22,6 @@ func navigation(delta) -> void:
 	velocity = (
 		global_position.direction_to(next_path_position) * 100
 	)
-	pass
 
 func navTimeout():
 	set_target()
