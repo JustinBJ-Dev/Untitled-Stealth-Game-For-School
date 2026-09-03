@@ -56,5 +56,4 @@ metadata/_custom_type_script = "uid://dsf7qrj7tkjvj"
 scale = Vector2(5, 5)
 blend_mode = 2
 shadow_enabled = true
-shadow_filter = 2
 texture = ExtResource("5_sweqy")

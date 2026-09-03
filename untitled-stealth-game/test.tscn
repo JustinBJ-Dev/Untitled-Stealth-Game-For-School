@@ -61,10 +61,11 @@ points = PackedVector2Array(1024, 192, 768, 192, 768, 576, 520, 576, 520, 192, 2
 width = 5.0
 script = ExtResource("2_ppyta")
 metadata/_custom_type_script = "uid://h4i2gpigi1o7"
+metadata/_edit_lock_ = true
 
 [node name="PartolLogic" parent="Partol" unique_id=835768422 instance=ExtResource("3_ykrsh")]
 
 [node name="testEnemy" parent="Partol/PartolLogic" unique_id=1369649150 node_paths=PackedStringArray("partol_path", "target") instance=ExtResource("2_8uh7m")]
-position = Vector2(1136, 632)
+position = Vector2(1029, 192)
 partol_path = NodePath("..")
 target = NodePath("../../../player")
