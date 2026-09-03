@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://blokt4d45eotq" path="res://StateMachine/StataMachine.gd" id="2_x4eh8"]
 [ext_resource type="Script" uid="uid://g047vqs6l0uj" path="res://chasing.gd" id="3_jg7vu"]
 [ext_resource type="Script" uid="uid://dgfrsdc1ytgb3" path="res://idle.gd" id="4_iajr3"]
+[ext_resource type="Texture2D" uid="uid://dusaa0rf14sqo" path="res://spotlight.png" id="5_jg7vu"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_p7o00"]
 
@@ -49,3 +50,9 @@ enemy_ = NodePath("../..")
 metadata/_custom_type_script = "uid://b5lqognjyej6y"
 
 [node name="detectionCast" type="RayCast2D" parent="." unique_id=1666046053]
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1515697722]
+scale = Vector2(2, 2)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("5_jg7vu")
