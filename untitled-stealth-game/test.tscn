@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bccm00g6m5xoe"]
 
 [ext_resource type="PackedScene" uid="uid://b2huk5v86713o" path="res://player.tscn" id="1_37kl0"]
+[ext_resource type="Texture2D" uid="uid://bshvkkqg3lixw" path="res://square.png" id="1_ykrsh"]
 [ext_resource type="PackedScene" uid="uid://unfnr5bqlyaj" path="res://test_enemy.tscn" id="2_8uh7m"]
 [ext_resource type="Script" uid="uid://h4i2gpigi1o7" path="res://addons/Partol Points Plugin/Partol.gd" id="2_ppyta"]
 [ext_resource type="PackedScene" uid="uid://d2gkci8gyruaw" path="res://addons/Partol Points Plugin/partol_logic.tscn" id="3_ykrsh"]
@@ -12,24 +13,43 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(0, 0, 1160, 0, 1152, 64
 
 [sub_resource type="QuadMesh" id="QuadMesh_hxrvi"]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ppyta"]
+polygon = PackedVector2Array(608, 128, 648, 128, 648, 512, 608, 512)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p7o00"]
 size = Vector2(40, 384)
 
 [node name="Test" type="Node2D" unique_id=1374419755]
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=342137510]
+modulate = Color(0.36681426, 9.168908e-05, 0.36681154, 1)
+position = Vector2(552, 312)
+scale = Vector2(1500, 1500)
+texture = ExtResource("1_ykrsh")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1559757854]
+color = Color(0.27569968, 0.27569968, 0.27569965, 1)
+
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=900439969]
 navigation_polygon = SubResource("NavigationPolygon_37kl0")
 
 [node name="player" parent="." unique_id=1967735014 instance=ExtResource("1_37kl0")]
-position = Vector2(168, 144)
+position = Vector2(312, 160)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=11642355]
 position = Vector2(608, 128)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D" unique_id=1380486816]
+modulate = Color(1, 0.25882354, 0.11372549, 1)
+light_mask = 0
 position = Vector2(19.750002, 191.75)
 scale = Vector2(40.500004, 384.5)
 mesh = SubResource("QuadMesh_hxrvi")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D/MeshInstance2D" unique_id=882876374]
+position = Vector2(-15.499998, -0.8315995)
+scale = Vector2(0.024691354, 0.0026007802)
+occluder = SubResource("OccluderPolygon2D_ppyta")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=438196707]
 position = Vector2(20, 192)
@@ -40,12 +60,12 @@ position = Vector2(-8, 0)
 points = PackedVector2Array(1024, 192, 768, 192, 768, 576, 520, 576, 520, 192, 200, 192, 520, 192, 520, 576, 768, 576, 768, 192, 1024, 192)
 width = 5.0
 script = ExtResource("2_ppyta")
-debug = true
 metadata/_custom_type_script = "uid://h4i2gpigi1o7"
+metadata/_edit_lock_ = true
 
 [node name="PartolLogic" parent="Partol" unique_id=835768422 instance=ExtResource("3_ykrsh")]
 
 [node name="testEnemy" parent="Partol/PartolLogic" unique_id=1369649150 node_paths=PackedStringArray("partol_path", "target") instance=ExtResource("2_8uh7m")]
-position = Vector2(1136, 632)
+position = Vector2(1029, 192)
 partol_path = NodePath("..")
 target = NodePath("../../../player")

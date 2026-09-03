@@ -4,27 +4,27 @@
 [ext_resource type="Script" uid="uid://blokt4d45eotq" path="res://StateMachine/StataMachine.gd" id="2_x4eh8"]
 [ext_resource type="Script" uid="uid://g047vqs6l0uj" path="res://chasing.gd" id="3_jg7vu"]
 [ext_resource type="Script" uid="uid://dgfrsdc1ytgb3" path="res://idle.gd" id="4_iajr3"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_p7o00"]
+[ext_resource type="Texture2D" uid="uid://dusaa0rf14sqo" path="res://spotlight.png" id="5_jg7vu"]
+[ext_resource type="Texture2D" uid="uid://d2kllw61p3vvr" path="res://flashlight.png" id="6_4humj"]
+[ext_resource type="Texture2D" uid="uid://bshvkkqg3lixw" path="res://square.png" id="7_vpsq7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p7o00"]
 radius = 16.0
 
-[node name="testEnemy" type="CharacterBody2D" unique_id=1369649150 node_paths=PackedStringArray("nav2d", "detectionCast")]
+[sub_resource type="SphereMesh" id="SphereMesh_p7o00"]
+
+[node name="testEnemy" type="CharacterBody2D" unique_id=1369649150 node_paths=PackedStringArray("nav2d", "detectionCast", "detectionArea", "visionCone")]
 script = ExtResource("1_ghv5c")
 nav2d = NodePath("NavigationAgent2D")
 detectionCast = NodePath("detectionCast")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=943960601]
-scale = Vector2(32.53629, 32.500008)
-mesh = SubResource("SphereMesh_p7o00")
+detectionArea = NodePath("MeshInstance2D/visionCone")
+visionCone = NodePath("MeshInstance2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1860920870]
 shape = SubResource("CircleShape2D_p7o00")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=143890723]
 path_desired_distance = 5.0
-debug_enabled = true
 
 [node name="StateMachine" type="Node" parent="." unique_id=437612346 node_paths=PackedStringArray("initail_state")]
 script = ExtResource("2_x4eh8")
@@ -49,3 +49,32 @@ enemy_ = NodePath("../..")
 metadata/_custom_type_script = "uid://b5lqognjyej6y"
 
 [node name="detectionCast" type="RayCast2D" parent="." unique_id=1666046053]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=943960601]
+scale = Vector2(32.53629, 32.500008)
+mesh = SubResource("SphereMesh_p7o00")
+
+[node name="PointLight2D" type="PointLight2D" parent="MeshInstance2D" unique_id=1515697722]
+scale = Vector2(0.06146982, 0.061538443)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("5_jg7vu")
+
+[node name="PointLight2D2" type="PointLight2D" parent="MeshInstance2D" unique_id=1829727804]
+scale = Vector2(0.25, 0.25)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("6_4humj")
+
+[node name="visionCone" type="Area2D" parent="MeshInstance2D" unique_id=464785541]
+scale = Vector2(0.030734908, 0.03076922)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MeshInstance2D/visionCone" unique_id=2138071926]
+polygon = PackedVector2Array(224.00006, -104.000015, 0, 0, 224.00006, 96.000015)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1542579118]
+visible = false
+modulate = Color(1, 1, 0, 1)
+position = Vector2(8.000001, 0)
+scale = Vector2(1000, 1000)
+texture = ExtResource("7_vpsq7")

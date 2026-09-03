@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://blokt4d45eotq" path="res://StateMachine/StataMachine.gd" id="2_i3pqv"]
 [ext_resource type="Script" uid="uid://6dmsxuouamqr" path="res://player_idle.gd" id="3_hqtel"]
 [ext_resource type="Script" uid="uid://7v4xouta2cxc" path="res://player_run.gd" id="4_sweqy"]
+[ext_resource type="Texture2D" uid="uid://dusaa0rf14sqo" path="res://spotlight.png" id="5_sweqy"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_p7o00"]
 
@@ -50,3 +51,9 @@ Idle_State = NodePath("../Idle")
 SPEED = 200
 player_ = NodePath("../..")
 metadata/_custom_type_script = "uid://dsf7qrj7tkjvj"
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1727971680]
+scale = Vector2(5, 5)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("5_sweqy")

@@ -5,6 +5,10 @@ extends CharacterBody2D
 @export var partol_path : Partol_Path
 @export var target : Node2D
 @export var detectionCast : RayCast2D
+@export var detectionArea : Area2D
+@export var visionCone : Node2D
+
+
 var is_detecting_player : bool = false
 var navTimer : Timer
 var player_node : player
@@ -14,6 +18,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	
+	visionCone.look_at(global_position + velocity)
+	
 	detectionCast.target_position = player_node.global_position - self.global_position
 	detect_player()
 	navigation(delta)
@@ -22,7 +28,9 @@ func _physics_process(delta: float) -> void:
 func detect_player() -> void:
 	if detectionCast.is_colliding() == true:
 		if detectionCast.get_collider() == player_node:
-			is_detecting_player = true
+			for i in detectionArea.get_overlapping_bodies():
+				if i == player_node:
+					is_detecting_player = true
 		else:
 			is_detecting_player = false
 
