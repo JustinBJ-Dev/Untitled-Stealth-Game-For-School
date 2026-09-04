@@ -11,6 +11,8 @@ var current_point_position : Vector2 #Contains the position of the current point
 var current_point_number : int = 0 #Contains the current point on the path
 var next_point_number : int #Contains the next point on the path
 
+@export_category("Properties")
+@export var enemy_speed : int = 100
 @export var naviagation_timer_wait_time : float = 0.1
 
 @export_category("States")
@@ -34,18 +36,18 @@ func _ready() -> void:
 
 func enter_state() -> void:
 	navTimer.start()
+	enemy_.SPEED = enemy_speed
 	
+	determine_path_on_enter()
+
+func determine_path_on_enter() -> void: #If the last position on the path is closer than the closet point, the enemy will go the last position on the graph.
 	if enemy_.global_position.distance_to(pathPosition) >= enemy_.global_position.distance_to(partolPath.get_point_position(partolPath.get_closest_point(enemy_.global_position))):
-		#If the last position on the path is closer than the closet point, the enemy will go the last position on the graph.
-		
 		current_point_number = partolPath.get_closest_point(enemy_.global_position)
 		current_point_position = partolPath.get_point_position(current_point_number)
 		next_point_number = partolPath.get_next_point(current_point_number)
 		pathPosition = current_point_position
-	
-	
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	is_detecting_player()
 	
 	detect_is_on_path()

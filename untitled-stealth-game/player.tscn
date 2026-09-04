@@ -48,7 +48,7 @@ metadata/_custom_type_script = "uid://dsf7qrj7tkjvj"
 [node name="Run" type="Node" parent="StateMachine" unique_id=1439257435 node_paths=PackedStringArray("Idle_State", "player_")]
 script = ExtResource("4_sweqy")
 Idle_State = NodePath("../Idle")
-SPEED = 200
+SPEED = 250
 player_ = NodePath("../..")
 metadata/_custom_type_script = "uid://dsf7qrj7tkjvj"
 

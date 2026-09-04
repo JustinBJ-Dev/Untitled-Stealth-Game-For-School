@@ -1,11 +1,14 @@
 extends EnemyState
 
+@export_category("Properties")
+@export var enemy_speed : int = 100
+@export var naviagation_timer_wait_time : float = 0.1
+
 @export_category("States")
 @export var Idle : State
 @export var detectionCast : RayCast2D
 
 var navTimer : Timer
-@export var naviagation_timer_wait_time : float = 0.1
 
 func _ready() -> void:
 	navTimer = Timer.new()
@@ -14,12 +17,13 @@ func _ready() -> void:
 	navTimer.timeout.connect(navTimeout)
 
 func enter_state() -> void:
+	enemy_.SPEED = enemy_speed
 	navTimer.start()
 	
 	enemy_.target = enemy_.player_node
 	pass
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	is_detecting_player()
 
 func is_detecting_player() -> void:

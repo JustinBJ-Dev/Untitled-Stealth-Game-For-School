@@ -5,12 +5,12 @@ var dirY: float
 
 var playerInput  : Array
 
-func _process(delta):
+func _process(_delta):
 	dirX = Input.get_axis("input_left", "input_right")
 	dirY = Input.get_axis("input_up", "input_down")
 	
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	self.look_at(global_position + velocity)
 	
 	move_and_slide()
