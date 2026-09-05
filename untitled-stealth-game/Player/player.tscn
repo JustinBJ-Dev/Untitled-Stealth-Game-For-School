@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://b5qpi8vy6ami1" path="res://Player/player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://blokt4d45eotq" path="res://StateMachine/StataMachine.gd" id="2_i3pqv"]
-[ext_resource type="Script" uid="uid://6dmsxuouamqr" path="res://Player/player_idle.gd" id="3_hqtel"]
-[ext_resource type="Script" uid="uid://7v4xouta2cxc" path="res://Player/player_run.gd" id="4_sweqy"]
+[ext_resource type="Script" uid="uid://6dmsxuouamqr" path="res://Player/PlayerStates/player_idle.gd" id="3_hqtel"]
+[ext_resource type="Script" uid="uid://7v4xouta2cxc" path="res://Player/PlayerStates/player_run.gd" id="4_sweqy"]
+[ext_resource type="Script" uid="uid://dsf7qrj7tkjvj" path="res://StateMachine/PlayerState.gd" id="5_fhl08"]
 [ext_resource type="Texture2D" uid="uid://dusaa0rf14sqo" path="res://Lighting/spotlight.png" id="5_sweqy"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_p7o00"]
@@ -16,10 +17,11 @@ height = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p7o00"]
 
-[node name="player" type="CharacterBody2D" unique_id=1967735014 node_paths=PackedStringArray("healthBar") groups=["player"]]
+[node name="player" type="CharacterBody2D" unique_id=1967735014 node_paths=PackedStringArray("healthBar", "energyBar") groups=["player"]]
 collision_mask = 12
 script = ExtResource("1_onrkg")
-healthBar = NodePath("Player UI/Control/HBoxContainer/VBoxContainer/ProgressBar")
+healthBar = NodePath("Player UI/Control/HBoxContainer/VBoxContainer/HealthBar")
+energyBar = NodePath("Player UI/Control/HBoxContainer/VBoxContainer/energyBar")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1059612354]
 position = Vector2(19.999998, 0)
@@ -62,8 +64,12 @@ SPEED = 250
 player_ = NodePath("../..")
 metadata/_custom_type_script = "uid://dsf7qrj7tkjvj"
 
+[node name="Dashing" type="Node" parent="StateMachine" unique_id=1867312971]
+script = ExtResource("5_fhl08")
+metadata/_custom_type_script = "uid://dsf7qrj7tkjvj"
+
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1727971680]
-scale = Vector2(5, 5)
+scale = Vector2(6, 6)
 blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("5_sweqy")
@@ -82,7 +88,7 @@ grow_vertical = 2
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_right = 83.0
+offset_right = 91.0
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Player UI/Control/HBoxContainer" unique_id=1263610956]
@@ -90,7 +96,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="ProgressBar" type="ProgressBar" parent="Player UI/Control/HBoxContainer/VBoxContainer" unique_id=1414577101]
+[node name="HealthBar" type="ProgressBar" parent="Player UI/Control/HBoxContainer/VBoxContainer" unique_id=1414577101]
 layout_mode = 2
 max_value = 3.0
 value = 3.0
@@ -98,3 +104,7 @@ value = 3.0
 [node name="Label" type="Label" parent="Player UI/Control/HBoxContainer/VBoxContainer" unique_id=1302051886]
 layout_mode = 2
 text = "Health Bar"
+
+[node name="energyBar" type="ProgressBar" parent="Player UI/Control/HBoxContainer/VBoxContainer" unique_id=1552292202]
+layout_mode = 2
+size_flags_horizontal = 3
