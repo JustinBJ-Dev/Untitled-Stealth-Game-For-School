@@ -13,6 +13,10 @@ extends EnemyState
 
 var navTimer : Timer
 
+var chaseTime : int = 150
+var chaseWaitTime : int
+var canNotChase : bool = false
+
 var dashTimer : Timer
 var can_dash : bool = false
 
@@ -23,6 +27,8 @@ func _ready() -> void:
 	navTimer.timeout.connect(navTimeout)
 
 func enter_state() -> void:
+	canNotChase = false
+	
 	enemy_.SPEED = enemy_speed
 	enemy_.target = enemy_.player_node
 	navTimer.start()
@@ -37,7 +43,19 @@ func enter_state() -> void:
 
 func physics_update(_delta: float) -> void:
 	is_detecting_player()
+	handle_dash()
+
+func update(delta: float) -> void:
+	if enemy_.is_detecting_player != true:
+		chaseWaitTime -= 1
+	else :
+		chaseWaitTime = chaseTime
 	
+	if chaseWaitTime <= 0:
+		canNotChase = true
+		
+
+func handle_dash() -> void:
 	if can_dash == true:
 		if enemy_.is_detecting_player == true:
 			for i in dashingArea.get_overlapping_areas():
@@ -46,7 +64,8 @@ func physics_update(_delta: float) -> void:
 
 func is_detecting_player() -> void:
 	if enemy_.is_detecting_player != true:
-		switch_state.emit(Idle)
+		if canNotChase == true:
+			switch_state.emit(Idle)
 	else:
 		return
 	pass
@@ -62,6 +81,7 @@ func dashTimeout() -> void:
 	pass
 
 func exit_state() -> void:
+	chaseWaitTime = 0
 	can_dash = false
 	navTimer.stop()
 	

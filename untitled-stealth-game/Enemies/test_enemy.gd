@@ -39,7 +39,7 @@ func detect_player() -> void:
 			is_detecting_player = false
 
 func set_target() -> void:
-	nav2d.target_position = target.global_position
+		nav2d.target_position = target.global_position
 
 func navigation(_delta) -> void:
 	if navigating == true:

@@ -36,7 +36,7 @@ path_desired_distance = 5.0
 
 [node name="StateMachine" type="Node" parent="." unique_id=437612346 node_paths=PackedStringArray("initail_state")]
 script = ExtResource("2_x4eh8")
-initail_state = NodePath("Chasing")
+initail_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://blokt4d45eotq"
 
 [node name="Chasing" type="Node" parent="StateMachine" unique_id=617698607 node_paths=PackedStringArray("detectionCast", "dashingArea", "Idle", "Dashing", "enemy_", "parent")]
@@ -107,7 +107,7 @@ collision_layer = 2
 collision_mask = 13
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Visuals/visionCone" unique_id=2138071926]
-polygon = PackedVector2Array(224.00006, -104.000015, 24.000006, -24.000004, 0, -56.000008, -40.000008, 0, 0, 56.000008, 24.000006, 24.000004, 224.00006, 96.000015)
+polygon = PackedVector2Array(224.00006, -104.000015, 24.000006, -24.000004, 0, -56.000008, -40.000008, 0, 0, 56.000008, 24.000006, 24.000004, 224.00006, 96.000015, 256.00006, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1542579118]
 visible = false

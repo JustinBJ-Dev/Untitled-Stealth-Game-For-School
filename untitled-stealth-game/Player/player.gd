@@ -19,8 +19,8 @@ func _process(_delta):
 	playerInput = playerInput.normalized()
 	playerDirection = Vector2(cos(rotation),sin(rotation)).normalized()
 	
-	if Input.is_action_just_pressed("ui_accept"):
-		playerEnergy -= 100
+	if playerEnergy < 100:
+		playerEnergy += 1
 	
 	manage_ui()
 

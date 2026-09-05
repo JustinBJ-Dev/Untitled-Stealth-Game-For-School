@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://blokt4d45eotq" path="res://StateMachine/StataMachine.gd" id="2_i3pqv"]
 [ext_resource type="Script" uid="uid://6dmsxuouamqr" path="res://Player/PlayerStates/player_idle.gd" id="3_hqtel"]
 [ext_resource type="Script" uid="uid://7v4xouta2cxc" path="res://Player/PlayerStates/player_run.gd" id="4_sweqy"]
-[ext_resource type="Script" uid="uid://dsf7qrj7tkjvj" path="res://StateMachine/PlayerState.gd" id="5_fhl08"]
+[ext_resource type="Script" uid="uid://bstqvesluiyoa" path="res://Player/PlayerStates/player_dashing.gd" id="5_fhl08"]
 [ext_resource type="Texture2D" uid="uid://dusaa0rf14sqo" path="res://Lighting/spotlight.png" id="5_sweqy"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_p7o00"]
@@ -51,21 +51,27 @@ script = ExtResource("2_i3pqv")
 initail_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://blokt4d45eotq"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=1225486931 node_paths=PackedStringArray("Run_State", "player_")]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1225486931 node_paths=PackedStringArray("Run_State", "Dashing", "player_")]
 script = ExtResource("3_hqtel")
 Run_State = NodePath("../Run")
+Dashing = NodePath("../Dashing")
 player_ = NodePath("../..")
 metadata/_custom_type_script = "uid://dsf7qrj7tkjvj"
 
-[node name="Run" type="Node" parent="StateMachine" unique_id=1439257435 node_paths=PackedStringArray("Idle_State", "player_")]
+[node name="Run" type="Node" parent="StateMachine" unique_id=1439257435 node_paths=PackedStringArray("Idle_State", "Dashing", "player_")]
 script = ExtResource("4_sweqy")
 Idle_State = NodePath("../Idle")
+Dashing = NodePath("../Dashing")
 SPEED = 250
 player_ = NodePath("../..")
 metadata/_custom_type_script = "uid://dsf7qrj7tkjvj"
 
-[node name="Dashing" type="Node" parent="StateMachine" unique_id=1867312971]
+[node name="Dashing" type="Node" parent="StateMachine" unique_id=1867312971 node_paths=PackedStringArray("Idle", "player_")]
 script = ExtResource("5_fhl08")
+wait_time = 0.2
+dashing_speed = 1000
+Idle = NodePath("../Idle")
+player_ = NodePath("../..")
 metadata/_custom_type_script = "uid://dsf7qrj7tkjvj"
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1727971680]
