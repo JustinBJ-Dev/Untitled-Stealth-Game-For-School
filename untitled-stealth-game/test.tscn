@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bccm00g6m5xoe"]
 
-[ext_resource type="PackedScene" uid="uid://b2huk5v86713o" path="res://player.tscn" id="1_37kl0"]
+[ext_resource type="PackedScene" uid="uid://b2huk5v86713o" path="res://Player/player.tscn" id="1_37kl0"]
 [ext_resource type="Texture2D" uid="uid://bshvkkqg3lixw" path="res://square.png" id="1_ykrsh"]
-[ext_resource type="PackedScene" uid="uid://unfnr5bqlyaj" path="res://test_enemy.tscn" id="2_8uh7m"]
+[ext_resource type="PackedScene" uid="uid://unfnr5bqlyaj" path="res://Enemies/test_enemy.tscn" id="2_8uh7m"]
 [ext_resource type="Script" uid="uid://h4i2gpigi1o7" path="res://addons/Partol Points Plugin/Partol.gd" id="2_ppyta"]
 [ext_resource type="PackedScene" uid="uid://d2gkci8gyruaw" path="res://addons/Partol Points Plugin/partol_logic.tscn" id="3_ykrsh"]
 
@@ -38,6 +38,8 @@ position = Vector2(312, 160)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=11642355]
 position = Vector2(608, 128)
+collision_layer = 8
+collision_mask = 15
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D" unique_id=1380486816]
 modulate = Color(1, 0.25882354, 0.11372549, 1)

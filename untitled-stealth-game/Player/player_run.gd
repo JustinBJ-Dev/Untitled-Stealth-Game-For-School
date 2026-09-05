@@ -10,5 +10,5 @@ func update(_delta: float) -> void:
 		switch_state.emit(Idle_State)
 
 func physics_update(_delta: float) -> void:
-	player_.velocity.x = SPEED * player_.dirX
-	player_.velocity.y = SPEED * player_.dirY
+	player_.velocity.x = SPEED * player_.playerInput.x
+	player_.velocity.y = SPEED * player_.playerInput.y
