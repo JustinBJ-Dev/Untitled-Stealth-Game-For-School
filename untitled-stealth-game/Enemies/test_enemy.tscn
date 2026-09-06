@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://dusaa0rf14sqo" path="res://Lighting/spotlight.png" id="5_jg7vu"]
 [ext_resource type="Texture2D" uid="uid://d2kllw61p3vvr" path="res://Lighting/flashlight.png" id="6_4humj"]
 [ext_resource type="Texture2D" uid="uid://bshvkkqg3lixw" path="res://square.png" id="7_vpsq7"]
+[ext_resource type="Script" uid="uid://dmhyvv3i0gwk4" path="res://Entitles/HitBox.gd" id="9_efyi5"]
+[ext_resource type="Script" uid="uid://djd3qb3vcbyb1" path="res://Entitles/HurtBox.gd" id="10_xn6gn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p7o00"]
 radius = 16.0
@@ -18,6 +20,13 @@ radius = 64.0
 [sub_resource type="SphereMesh" id="SphereMesh_p7o00"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_p7o00"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_rmqey"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wew43"]
+radius = 8.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hxrvi"]
 
 [node name="testEnemy" type="CharacterBody2D" unique_id=1369649150 node_paths=PackedStringArray("nav2d", "detectionCast", "detectionArea", "visual")]
 collision_layer = 2
@@ -43,7 +52,7 @@ metadata/_custom_type_script = "uid://blokt4d45eotq"
 script = ExtResource("3_55wc7")
 enemy_speed = 275
 naviagation_timer_wait_time = 0.05
-dashing_timer_wait_time = 1.0
+dashing_timer_wait_time = 0.75
 detectionCast = NodePath("../../detectionCast")
 dashingArea = NodePath("../../DashArea")
 Idle = NodePath("../Idle")
@@ -73,6 +82,7 @@ collision_mask = 9
 
 [node name="DashArea" type="Area2D" parent="." unique_id=1430133035]
 collision_mask = 9
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DashArea" unique_id=734685663]
 shape = SubResource("CircleShape2D_pj23d")
@@ -88,6 +98,12 @@ position = Vector2(16.000002, -5.966666e-14)
 rotation = -1.5707964
 scale = Vector2(32.500008, 32.53629)
 mesh = SubResource("PrismMesh_p7o00")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Visuals" unique_id=377901197]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(-8.120329, 2.861023e-06)
+scale = Vector2(16.25907, 32.000004)
+mesh = SubResource("QuadMesh_rmqey")
 
 [node name="PointLight2D" type="PointLight2D" parent="Visuals" unique_id=1515697722]
 scale = Vector2(1.9999999, 1.9999999)
@@ -105,6 +121,7 @@ texture = ExtResource("6_4humj")
 scale = Vector2(0.9999998, 0.9999999)
 collision_layer = 2
 collision_mask = 13
+metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Visuals/visionCone" unique_id=2138071926]
 polygon = PackedVector2Array(224.00006, -104.000015, 24.000006, -24.000004, 0, -56.000008, -40.000008, 0, 0, 56.000008, 24.000006, 24.000004, 224.00006, 96.000015, 256.00006, 0)
@@ -121,3 +138,21 @@ offset_left = -16.0
 offset_top = -40.0
 offset_right = 24.0
 offset_bottom = -17.0
+
+[node name="HitBox" type="Area2D" parent="." unique_id=266288771]
+script = ExtResource("9_efyi5")
+metadata/_custom_type_script = "uid://dmhyvv3i0gwk4"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1365776044]
+position = Vector2(16, 0)
+shape = SubResource("CircleShape2D_wew43")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=265167126]
+script = ExtResource("10_xn6gn")
+metadata/_custom_type_script = "uid://djd3qb3vcbyb1"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1497547976]
+position = Vector2(-8, 0)
+shape = SubResource("CapsuleShape2D_hxrvi")
