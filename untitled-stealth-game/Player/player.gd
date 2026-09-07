@@ -5,7 +5,7 @@ var dirY: float
 var playerInput  : Vector2
 var playerDirection : Vector2
 
-var playerHealth : float = 3.0
+var playerHealth : float = 3.0: set = _take_damage
 var playerEnergy : float = 100
 
 @export var healthBar : ProgressBar
@@ -33,3 +33,7 @@ func _physics_process(_delta: float) -> void:
 	self.look_at(global_position + velocity)
 	
 	move_and_slide()
+
+func _take_damage(damage) -> void:
+	playerHealth -= damage
+	

@@ -57,6 +57,14 @@ input_left={
 2d_physics/layer_2="Enemy"
 2d_physics/layer_3="Items"
 2d_physics/layer_4="Enviroment"
+2d_physics/layer_5="PlayerHitBox"
+2d_physics/layer_6="PlayerHurtbox"
+2d_physics/layer_7="EnemyHitbox"
+2d_physics/layer_8="EnemyHurtBox"
+
+[navigation]
+
+2d/default_edge_connection_margin=8.0
 
 [physics]
 
