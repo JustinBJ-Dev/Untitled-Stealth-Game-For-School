@@ -26,9 +26,18 @@ func enter_state() -> void:
 	visualTimer.start()
 	stateTimer.start()
 	
-	enemy_.set_collision_layer_value(2, false)
-	hitbox.disabled = true
+	enemy_.navigating = false
+	enemy_.velocity *= 0
 	
+	call_deferred("disable_collision")
+
+func disable_collision() -> void:
+	hitbox.disabled = true
+	enemy_.set_collision_layer_value(2, false)
+	enemy_.set_collision_mask_value(1, false)
+
+func update(delta: float) -> void:
+	enemy_.is_detecting_player = false
 
 func visualTimer_Timeout() -> void:
 	if visuals.visible == true:
@@ -43,6 +52,8 @@ func stateTimer_Timeout() -> void:
 
 func exit_state() -> void:
 	enemy_.set_collision_layer_value(2, true)
+	enemy_.set_collision_mask_value(1, true)
+	enemy_.navigating = true
 	hitbox.disabled = false
 	
 	visualTimer.stop()

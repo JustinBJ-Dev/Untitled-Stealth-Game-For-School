@@ -138,7 +138,7 @@ size_flags_vertical = 0
 
 [node name="HealthBar" type="ProgressBar" parent="Player UI/Control/HBoxContainer/VBoxContainer" unique_id=1414577101]
 layout_mode = 2
-max_value = 3.0
+max_value = 5.0
 value = 3.0
 
 [node name="Label" type="Label" parent="Player UI/Control/HBoxContainer/VBoxContainer" unique_id=1302051886]

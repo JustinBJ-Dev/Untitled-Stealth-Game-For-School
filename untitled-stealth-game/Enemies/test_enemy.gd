@@ -60,7 +60,6 @@ func navTimeout():
 
 
 func _on_hurt_box_took_hit(hit: Attack) -> void:
-	print("Hi listen")
 	stateMachine.change_state(tookHit_State)
 	pass # Replace with function body.
 

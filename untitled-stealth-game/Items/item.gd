@@ -3,9 +3,14 @@ class_name Item extends CharacterBody2D
 @export var friction : float
 @export var speed : float
 
+@onready var hitbox : HitBox = $HitBox
+
+var health : int = 5
+
 var pickedUp : bool = false
 var pickUp_Point : Marker2D
 var direction : Vector2
+
 
 func _process(delta: float) -> void:
 	if pickUp_Point == null:
@@ -17,15 +22,28 @@ func _physics_process(delta):
 	if pickedUp:
 		if pickUp_Point != null:
 			self.global_transform = pickUp_Point.global_transform
+			hitbox.disabled = true
+	else:
+		if velocity.round().x == 0 and velocity.round().y == 0:
+			hitbox.disabled = true
+			if health == 0:
+				queue_free()
+		else:
+			hitbox.disabled = false
+			pass
 	
 	velocity = velocity.lerp(Vector2(0,0), friction)
 	
 	if collision:
-		velocity = velocity.bounce(collision.get_normal())
+		if health >= 0:
+			velocity = velocity.bounce(collision.get_normal())
+		else:
+			queue_free()
 
 func throw():
 	direction = Vector2(cos(rotation),sin(rotation)).normalized()
 	velocity = speed * direction
 	
+	health -= 1
 	
 	pickedUp = false

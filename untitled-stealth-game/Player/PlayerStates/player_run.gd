@@ -5,6 +5,7 @@ extends PlayerState
 
 @export_category("Properties")
 @export var SPEED : int = 300
+@export var ACCEL : float = 0.75
 
 func update(_delta: float) -> void:
 	if player_.dirX == 0 && player_.dirY == 0:
@@ -15,5 +16,5 @@ func update(_delta: float) -> void:
 			switch_state.emit(Dashing)
 
 func physics_update(_delta: float) -> void:
-	player_.velocity.x = SPEED * player_.playerInput.x
-	player_.velocity.y = SPEED * player_.playerInput.y
+	player_.velocity.x = lerp(player_.velocity.x, SPEED * player_.playerInput.x, ACCEL)
+	player_.velocity.y = lerp(player_.velocity.y, SPEED * player_.playerInput.y, ACCEL)

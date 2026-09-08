@@ -86,6 +86,8 @@ metadata/_custom_type_script = "uid://b5lqognjyej6y"
 
 [node name="TookHit" type="Node" parent="StateMachine" unique_id=376457571 node_paths=PackedStringArray("visuals", "hitbox", "FollowPath", "enemy_")]
 script = ExtResource("7_rslcp")
+visual_timer_wait_time = 0.1
+state_timer_wait_time = 2.0
 visuals = NodePath("../../Visuals")
 hitbox = NodePath("../../HitBox")
 FollowPath = NodePath("../FollowPath")
@@ -162,7 +164,8 @@ position = Vector2(16, 0)
 shape = SubResource("CircleShape2D_wew43")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=265167126]
-collision_layer = 2
+collision_layer = 128
+collision_mask = 16
 script = ExtResource("10_xn6gn")
 hitExceptions = [null]
 metadata/_custom_type_script = "uid://djd3qb3vcbyb1"
@@ -171,5 +174,4 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1497547976]
 shape = SubResource("CapsuleShape2D_hxrvi")
 
-[connection signal="area_entered" from="HitBox" to="HitBox" method="_on_area_entered"]
 [connection signal="tookHit" from="HurtBox" to="." method="_on_hurt_box_took_hit"]
