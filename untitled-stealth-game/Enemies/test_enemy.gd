@@ -8,6 +8,8 @@ extends CharacterBody2D
 @export var detectionCast : RayCast2D
 @export var detectionArea : Area2D
 @export var visual : Node2D
+@export var stateMachine : StateMachine
+@export var tookHit_State : State
 @export_category("Propertires")
 @export var SPEED : int = 100
 
@@ -55,3 +57,13 @@ func navigation(_delta) -> void:
 
 func navTimeout():
 	set_target()
+
+
+func _on_hurt_box_took_hit(hit: Attack) -> void:
+	print("Hi listen")
+	stateMachine.change_state(tookHit_State)
+	pass # Replace with function body.
+
+
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.

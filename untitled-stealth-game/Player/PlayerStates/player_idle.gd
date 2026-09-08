@@ -8,7 +8,7 @@ func update(_delta: float) -> void:
 	if player_.dirX != 0 or player_.dirY != 0:
 		switch_state.emit(Run_State)
 	
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("input_dash"):
 		if player_.playerEnergy >= 100:
 			switch_state.emit(Dashing)
 

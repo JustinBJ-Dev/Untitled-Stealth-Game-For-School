@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://cg6c87bmislur"]
+
+[ext_resource type="Script" uid="uid://30seuefqmjnx" path="res://Items/item.gd" id="1_bkywi"]
+[ext_resource type="Script" uid="uid://dmhyvv3i0gwk4" path="res://Entitles/HitBox.gd" id="2_p2kau"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_p7o00"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p7o00"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pj23d"]
+radius = 8.0
+
+[node name="Item" type="CharacterBody2D" unique_id=1206623203]
+disable_mode = 2
+collision_layer = 4
+collision_mask = 9
+motion_mode = 1
+script = ExtResource("1_bkywi")
+friction = 0.075
+speed = 1000.0
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1045466954]
+scale = Vector2(8.500001, 8.500002)
+mesh = SubResource("SphereMesh_p7o00")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1472827102]
+shape = SubResource("CircleShape2D_p7o00")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1654239027]
+collision_layer = 16
+collision_mask = 128
+script = ExtResource("2_p2kau")
+metadata/_custom_type_script = "uid://dmhyvv3i0gwk4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=702062200]
+shape = SubResource("CircleShape2D_pj23d")

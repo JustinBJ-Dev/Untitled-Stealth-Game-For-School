@@ -8,23 +8,28 @@
 [ext_resource type="Texture2D" uid="uid://dusaa0rf14sqo" path="res://Lighting/spotlight.png" id="5_sweqy"]
 [ext_resource type="Script" uid="uid://djydo5jc7afn8" path="res://Player/player_stats.gd" id="6_od3ui"]
 [ext_resource type="Script" uid="uid://djd3qb3vcbyb1" path="res://Entitles/HurtBox.gd" id="7_vtle1"]
+[ext_resource type="Script" uid="uid://f4kyv5drm2ie" path="res://Player/pick_up_area.gd" id="8_00tjw"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_p7o00"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_pj23d"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t5fij"]
-radius = 8.0
-height = 32.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_p7o00"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wew43"]
+radius = 32.0
+height = 64.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_od3ui"]
 radius = 8.0
 height = 48.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_p7o00"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t5fij"]
+radius = 8.0
+height = 32.0
+
 [node name="player" type="CharacterBody2D" unique_id=1967735014 node_paths=PackedStringArray("healthBar", "energyBar") groups=["player"]]
-collision_mask = 12
+collision_mask = 8
 script = ExtResource("1_onrkg")
 healthBar = NodePath("Player UI/Control/HBoxContainer/VBoxContainer/HealthBar")
 energyBar = NodePath("Player UI/Control/HBoxContainer/VBoxContainer/energyBar")
@@ -75,22 +80,39 @@ rotation = -1.5707964
 scale = Vector2(39.999996, -9.873779)
 mesh = SubResource("PrismMesh_pj23d")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1875369770]
-position = Vector2(12, 0)
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1727971680]
+scale = Vector2(6, 6)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("5_sweqy")
+
+[node name="PickUp_Point" type="Marker2D" parent="." unique_id=1084360541 groups=["pick_up_point"]]
+position = Vector2(40, 0)
+
+[node name="PickUp_Area" type="Area2D" parent="." unique_id=196894545]
+collision_mask = 4
+script = ExtResource("8_00tjw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUp_Area" unique_id=926465480]
+position = Vector2(24, 0)
+shape = SubResource("CapsuleShape2D_wew43")
+
+[node name="Player_HurtBox" type="Area2D" parent="." unique_id=1759242994]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("7_vtle1")
+metadata/_custom_type_script = "uid://djd3qb3vcbyb1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player_HurtBox" unique_id=456643397]
+position = Vector2(16, 0)
 rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_t5fij")
+shape = SubResource("CapsuleShape2D_od3ui")
 
 [node name="DetectableArea" type="Area2D" parent="." unique_id=987679763 groups=["player"]]
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectableArea" unique_id=88319343]
 shape = SubResource("CircleShape2D_p7o00")
-
-[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1727971680]
-scale = Vector2(6, 6)
-blend_mode = 2
-shadow_enabled = true
-texture = ExtResource("5_sweqy")
 
 [node name="Player UI" type="CanvasLayer" parent="." unique_id=1241665425]
 
@@ -128,15 +150,9 @@ text = "Health Bar"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Player_HurtBox" type="Area2D" parent="." unique_id=1759242994]
-collision_layer = 32
-collision_mask = 0
-script = ExtResource("7_vtle1")
-metadata/_custom_type_script = "uid://djd3qb3vcbyb1"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player_HurtBox" unique_id=456643397]
-position = Vector2(16, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1875369770]
+position = Vector2(12, 0)
 rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_od3ui")
+shape = SubResource("CapsuleShape2D_t5fij")
 
 [connection signal="tookHit" from="Player_HurtBox" to="PlayerStats" method="_on_hurt_box_took_hit"]

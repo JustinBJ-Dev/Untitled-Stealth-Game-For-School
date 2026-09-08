@@ -17,7 +17,6 @@ var next_point_number : int #Contains the next point on the path
 
 @export_category("States")
 @export var Chasing : State
-@export var detectionCast : RayCast2D
 
 func _ready() -> void:
 	navTimer = Timer.new()
