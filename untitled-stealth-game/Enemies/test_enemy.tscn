@@ -45,6 +45,7 @@ tookHit_State = NodePath("StateMachine/TookHit")
 shape = SubResource("CircleShape2D_p7o00")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=143890723]
+debug_enabled = true
 
 [node name="StateMachine" type="Node" parent="." unique_id=437612346 node_paths=PackedStringArray("initail_state")]
 script = ExtResource("2_x4eh8")
@@ -89,7 +90,7 @@ script = ExtResource("7_rslcp")
 visual_timer_wait_time = 0.1
 state_timer_wait_time = 2.0
 visuals = NodePath("../../Visuals")
-hitbox = NodePath("../../HitBox")
+hitbox = NodePath("../../Visuals/HitBox")
 FollowPath = NodePath("../FollowPath")
 enemy_ = NodePath("../..")
 metadata/_custom_type_script = "uid://b5lqognjyej6y"
@@ -129,6 +130,18 @@ blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("6_4humj")
 
+[node name="HitBox" type="Area2D" parent="Visuals" unique_id=266288771]
+collision_layer = 64
+collision_mask = 32
+script = ExtResource("9_efyi5")
+attackDamage = 1
+metadata/_custom_type_script = "uid://dmhyvv3i0gwk4"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/HitBox" unique_id=1365776044]
+position = Vector2(16, 0)
+shape = SubResource("CircleShape2D_wew43")
+
 [node name="visionCone" type="Area2D" parent="Visuals" unique_id=464785541]
 scale = Vector2(0.9999998, 0.9999999)
 collision_layer = 2
@@ -150,18 +163,6 @@ offset_left = -16.0
 offset_top = -40.0
 offset_right = 24.0
 offset_bottom = -17.0
-
-[node name="HitBox" type="Area2D" parent="." unique_id=266288771]
-collision_layer = 64
-collision_mask = 32
-script = ExtResource("9_efyi5")
-attackDamage = 1
-metadata/_custom_type_script = "uid://dmhyvv3i0gwk4"
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1365776044]
-position = Vector2(16, 0)
-shape = SubResource("CircleShape2D_wew43")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=265167126]
 collision_layer = 128

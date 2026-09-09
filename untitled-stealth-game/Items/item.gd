@@ -28,6 +28,7 @@ func _physics_process(delta):
 			hitbox.disabled = true
 			if health == 0:
 				queue_free()
+				
 		else:
 			hitbox.disabled = false
 			pass

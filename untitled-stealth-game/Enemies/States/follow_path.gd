@@ -52,6 +52,9 @@ func physics_update(_delta: float) -> void:
 	detect_is_on_path()
 	set_path_position()
 	detect_is_at_point()
+	
+	if onPath != true:
+		enemy_.visual.look_at(enemy_.global_position + enemy_.velocity)
 
 func detect_is_on_path() -> void: #Detects if the enemy is current on the path
 	if enemy_.global_position.distance_to(pathPosition) <= 10:
@@ -67,7 +70,32 @@ func set_path_position() -> void: #Sets the pathPosition as the current_point_po
 func  detect_is_at_point() -> void: #Detect if the enemy is at a the current point, and sets next point if it is
 	if enemy_.global_position.distance_to(current_point_position) <= 10:
 		current_point_number = next_point_number
+		
+		if onPath:
+			enemy_.navigating = false
+			enemy_.reset_velocity()
+			await  rotate_path()
+			enemy_.navigating = true
+		
 		next_point_number = partolPath.get_next_point(current_point_number)
+
+func rotate_path():
+	var direction = enemy_.global_position.direction_to(partolPath.get_point_position(current_point_number))
+	direction = direction.angle()
+	var dir_angle = lerp_angle(enemy_.visual.rotation, direction, 1)
+	print(abs(dir_angle))
+	print(abs(enemy_.visual.rotation))
+	print(abs(dir_angle) - abs(enemy_.visual.rotation))
+	if abs(dir_angle) - abs(enemy_.visual.rotation) >= 0.5 || abs(dir_angle) - abs(enemy_.visual.rotation) <= -0.5:
+		var rotation_tween = get_tree().create_tween()
+		rotation_tween.tween_property(enemy_.visual, "rotation", dir_angle, 1)
+		await rotation_tween.finished
+		return
+	else:
+		enemy_.visual.rotation = direction
+		
+		return
+	pass
 
 func navTimeout():
 	handle_path()

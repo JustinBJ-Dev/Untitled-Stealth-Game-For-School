@@ -42,6 +42,7 @@ func enter_state() -> void:
 	pass
 
 func physics_update(_delta: float) -> void:
+	enemy_.visual.look_at(enemy_.global_position + enemy_.velocity)
 	is_detecting_player()
 	handle_dash()
 

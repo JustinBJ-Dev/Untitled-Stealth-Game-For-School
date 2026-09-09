@@ -24,7 +24,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	$Label.text = str($StateMachine.active_state)
-	visual.look_at(global_position + velocity)
+	
 	
 	detectionCast.target_position = player_node.global_position - self.global_position
 	detect_player()
@@ -53,16 +53,14 @@ func navigation(_delta) -> void:
 		)
 	else:
 		return
-		
 
-func navTimeout():
+func navTimeout() -> void:
 	set_target()
 
+func reset_velocity() -> void:
+	velocity = velocity * 0
+	pass
 
 func _on_hurt_box_took_hit(hit: Attack) -> void:
 	stateMachine.change_state(tookHit_State)
-	pass # Replace with function body.
-
-
-func _on_hurt_box_area_entered(area: Area2D) -> void:
 	pass # Replace with function body.
