@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://byjqmbhulcfcu"]
+
+[ext_resource type="Script" uid="uid://cqwdk8klv7eb3" path="res://Entitles/sound.gd" id="1_3j8lq"]
+
+[node name="Sound" type="Area2D" unique_id=927086639]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("1_3j8lq")

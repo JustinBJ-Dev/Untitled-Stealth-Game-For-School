@@ -3,6 +3,8 @@ extends EnemyState
 var stateTimer : Timer
 var visualTimer : Timer
 
+var visual_elements
+
 @export var visual_timer_wait_time : float = 0.25
 @export var state_timer_wait_time : float = 3
 
@@ -26,8 +28,8 @@ func enter_state() -> void:
 	visualTimer.start()
 	stateTimer.start()
 	
+	visual_elements = enemy_.rotation
 	enemy_.navigating = false
-	enemy_.velocity *= 0
 	
 	call_deferred("disable_collision")
 
@@ -38,6 +40,10 @@ func disable_collision() -> void:
 
 func update(delta: float) -> void:
 	enemy_.is_detecting_player = false
+
+func physics_update(delta: float) -> void:
+	enemy_.rotation = visual_elements
+	enemy_.reset_velocity()
 
 func visualTimer_Timeout() -> void:
 	if visuals.visible == true:

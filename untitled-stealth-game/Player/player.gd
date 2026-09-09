@@ -22,7 +22,7 @@ func _process(_delta):
 	playerDirection = Vector2(cos(rotation),sin(rotation)).normalized()
 	
 	if playerEnergy < 100:
-		playerEnergy += 2
+		playerEnergy += 1.25
 	
 	manage_ui()
 

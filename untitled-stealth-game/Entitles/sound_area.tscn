@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dq7hr2vo33i2"]
+
+[ext_resource type="Script" uid="uid://1luamwpusv0q" path="res://Entitles/sound_area.gd" id="1_5eddr"]
+
+[node name="SoundArea" type="Area2D" unique_id=1099695705]
+collision_layer = 0
+collision_mask = 256
+script = ExtResource("1_5eddr")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

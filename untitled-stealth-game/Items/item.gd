@@ -11,6 +11,8 @@ var pickedUp : bool = false
 var pickUp_Point : Marker2D
 var direction : Vector2
 
+var sound : Sound
+
 
 func _process(delta: float) -> void:
 	if pickUp_Point == null:
@@ -36,6 +38,11 @@ func _physics_process(delta):
 	velocity = velocity.lerp(Vector2(0,0), friction)
 	
 	if collision:
+		if !pickedUp:
+			sound = Sound.new()
+			sound.global_position = self.global_position
+			add_sibling(sound)
+		
 		if health >= 0:
 			velocity = velocity.bounce(collision.get_normal())
 		else:

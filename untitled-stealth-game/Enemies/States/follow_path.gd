@@ -11,6 +11,11 @@ var current_point_position : Vector2 #Contains the position of the current point
 var current_point_number : int = 0 #Contains the current point on the path
 var next_point_number : int #Contains the next point on the path
 
+var rotationTimer : Timer
+var rotationTime : float = 1
+var rotating : bool = false
+var kill_rotation : bool = false
+
 @export_category("Properties")
 @export var enemy_speed : int = 100
 @export var naviagation_timer_wait_time : float = 0.1
@@ -24,6 +29,11 @@ func _ready() -> void:
 	add_child(navTimer)
 	navTimer.timeout.connect(navTimeout)
 	
+	
+	rotationTimer = Timer.new()
+	rotationTimer.set_wait_time(rotationTime)
+	add_child(rotationTimer)
+	
 	target_point = Marker2D.new()
 	add_child(target_point)
 	
@@ -35,6 +45,7 @@ func _ready() -> void:
 
 func enter_state() -> void:
 	navTimer.start()
+	kill_rotation = false
 	enemy_.SPEED = enemy_speed
 	
 	determine_path_on_enter()
@@ -47,6 +58,7 @@ func determine_path_on_enter() -> void: #If the last position on the path is clo
 		pathPosition = current_point_position
 
 func physics_update(_delta: float) -> void:
+	
 	is_detecting_player()
 	
 	detect_is_on_path()
@@ -75,26 +87,34 @@ func  detect_is_at_point() -> void: #Detect if the enemy is at a the current poi
 			enemy_.navigating = false
 			enemy_.reset_velocity()
 			await  rotate_path()
-			enemy_.navigating = true
+			if rotating == false:
+				enemy_.reset_velocity()
+				enemy_.navigating = true
+				rotating = false
 		
 		next_point_number = partolPath.get_next_point(current_point_number)
 
 func rotate_path():
+	print("Rotating: ", rotating, "\nKill rotation: ", kill_rotation)
+	
 	var direction = enemy_.global_position.direction_to(partolPath.get_point_position(current_point_number))
 	direction = direction.angle()
 	var dir_angle = lerp_angle(enemy_.visual.rotation, direction, 1)
-	print(abs(dir_angle))
-	print(abs(enemy_.visual.rotation))
-	print(abs(dir_angle) - abs(enemy_.visual.rotation))
+	var rotation_tween = get_tree().create_tween()
 	if abs(dir_angle) - abs(enemy_.visual.rotation) >= 0.5 || abs(dir_angle) - abs(enemy_.visual.rotation) <= -0.5:
-		var rotation_tween = get_tree().create_tween()
-		rotation_tween.tween_property(enemy_.visual, "rotation", dir_angle, 1)
-		await rotation_tween.finished
-		return
+		if rotating == false:
+			rotating = true
+			rotation_tween.tween_property(enemy_.visual, "rotation", dir_angle, rotationTime)
+			await  rotation_tween.finished
+			rotating = false
+			return
 	else:
 		enemy_.visual.rotation = direction
 		
 		return
+	pass
+
+func heard_sound() -> void:
 	pass
 
 func navTimeout():
@@ -115,5 +135,8 @@ func is_detecting_player() -> void:
 
 func exit_state() -> void:
 	navTimer.stop()
+	rotationTimer.stop()
+	rotating = false
 	onPath = false
-	
+	kill_rotation = true
+	rotate_path()
