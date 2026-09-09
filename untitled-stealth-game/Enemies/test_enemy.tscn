@@ -45,7 +45,6 @@ tookHit_State = NodePath("StateMachine/TookHit")
 shape = SubResource("CircleShape2D_p7o00")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=143890723]
-debug_enabled = true
 
 [node name="StateMachine" type="Node" parent="." unique_id=437612346 node_paths=PackedStringArray("initail_state")]
 script = ExtResource("2_x4eh8")
