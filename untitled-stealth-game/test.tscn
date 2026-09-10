@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b2huk5v86713o" path="res://Player/player.tscn" id="1_37kl0"]
 [ext_resource type="Texture2D" uid="uid://bshvkkqg3lixw" path="res://square.png" id="1_ykrsh"]
-[ext_resource type="PackedScene" uid="uid://unfnr5bqlyaj" path="res://Enemies/test_enemy.tscn" id="2_8uh7m"]
+[ext_resource type="PackedScene" uid="uid://unfnr5bqlyaj" path="res://Enemies/dashing_enemy.tscn" id="2_8uh7m"]
 [ext_resource type="Script" uid="uid://h4i2gpigi1o7" path="res://addons/Partol Points Plugin/Partol.gd" id="2_ppyta"]
 [ext_resource type="PackedScene" uid="uid://d2gkci8gyruaw" path="res://addons/Partol Points Plugin/partol_logic.tscn" id="3_ykrsh"]
 [ext_resource type="Texture2D" uid="uid://bl66vhhbqwtgq" path="res://Art/base_tilemap.png" id="6_g14j6"]

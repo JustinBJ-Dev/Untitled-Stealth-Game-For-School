@@ -1,0 +1,193 @@
+[gd_scene format=3 uid="uid://unfnr5bqlyaj"]
+
+[ext_resource type="Script" uid="uid://xieq3na4dp1i" path="res://Enemies/dashing_enemy.gd" id="1_ghv5c"]
+[ext_resource type="Script" uid="uid://blokt4d45eotq" path="res://StateMachine/StataMachine.gd" id="2_x4eh8"]
+[ext_resource type="Script" uid="uid://g047vqs6l0uj" path="res://Enemies/States/chasing.gd" id="3_55wc7"]
+[ext_resource type="Script" uid="uid://dgfrsdc1ytgb3" path="res://Enemies/States/follow_path.gd" id="4_j0tst"]
+[ext_resource type="Script" uid="uid://bbpqrrw4ildsd" path="res://Enemies/States/follow_sound.gd" id="4_xn6gn"]
+[ext_resource type="Script" uid="uid://bpn6f4s1q8ar1" path="res://Enemies/States/dashing.gd" id="5_efyi5"]
+[ext_resource type="Texture2D" uid="uid://dusaa0rf14sqo" path="res://Lighting/spotlight.png" id="5_jg7vu"]
+[ext_resource type="Texture2D" uid="uid://d2kllw61p3vvr" path="res://Lighting/flashlight.png" id="6_4humj"]
+[ext_resource type="Script" uid="uid://q1amah0t1201" path="res://Enemies/States/took_hit.gd" id="7_rslcp"]
+[ext_resource type="Texture2D" uid="uid://bshvkkqg3lixw" path="res://square.png" id="7_vpsq7"]
+[ext_resource type="Script" uid="uid://dmhyvv3i0gwk4" path="res://Entitles/HitBox.gd" id="9_efyi5"]
+[ext_resource type="Script" uid="uid://djd3qb3vcbyb1" path="res://Entitles/HurtBox.gd" id="10_xn6gn"]
+[ext_resource type="Script" uid="uid://1luamwpusv0q" path="res://Entitles/sound_area.gd" id="13_k6jgc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p7o00"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pj23d"]
+radius = 96.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_p7o00"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_p7o00"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wew43"]
+radius = 8.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hxrvi"]
+radius = 24.0
+height = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t5fij"]
+radius = 384.0
+
+[node name="dashingEnemy" type="CharacterBody2D" unique_id=1369649150 node_paths=PackedStringArray("nav2d", "detectionCast", "detectionArea", "visual", "stateMachine", "tookHit_State")]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_ghv5c")
+nav2d = NodePath("NavigationAgent2D")
+detectionCast = NodePath("detectionCast")
+detectionArea = NodePath("Visuals/visionCone")
+visual = NodePath("Visuals")
+stateMachine = NodePath("StateMachine")
+tookHit_State = NodePath("StateMachine/TookHit")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1860920870]
+shape = SubResource("CircleShape2D_p7o00")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=143890723]
+
+[node name="StateMachine" type="Node" parent="." unique_id=437612346 node_paths=PackedStringArray("initail_state")]
+script = ExtResource("2_x4eh8")
+initail_state = NodePath("FollowPath")
+metadata/_custom_type_script = "uid://blokt4d45eotq"
+
+[node name="FollowPath" type="Node" parent="StateMachine" unique_id=41667267 node_paths=PackedStringArray("Chasing", "FollowSound", "enemy_")]
+script = ExtResource("4_j0tst")
+naviagation_timer_wait_time = 0.25
+Chasing = NodePath("../Chasing")
+FollowSound = NodePath("../FollowSound")
+enemy_ = NodePath("../..")
+metadata/_custom_type_script = "uid://b5lqognjyej6y"
+
+[node name="FollowSound" type="Node" parent="StateMachine" unique_id=1028627536 node_paths=PackedStringArray("Chasing", "FollowPath", "enemy_")]
+script = ExtResource("4_xn6gn")
+Chasing = NodePath("../Chasing")
+FollowPath = NodePath("../FollowPath")
+enemy_ = NodePath("../..")
+metadata/_custom_type_script = "uid://bww1i0uvfgc1w"
+
+[node name="Chasing" type="Node" parent="StateMachine" unique_id=617698607 node_paths=PackedStringArray("detectionCast", "dashingArea", "Idle", "Dashing", "enemy_", "parent")]
+script = ExtResource("3_55wc7")
+enemy_speed = 275
+naviagation_timer_wait_time = 0.05
+dashing_timer_wait_time = 0.75
+detectionCast = NodePath("../../detectionCast")
+dashingArea = NodePath("../../DashArea")
+Idle = NodePath("../FollowPath")
+Dashing = NodePath("../Dashing")
+enemy_ = NodePath("../..")
+parent = NodePath("../..")
+metadata/_custom_type_script = "uid://bww1i0uvfgc1w"
+
+[node name="Dashing" type="Node" parent="StateMachine" unique_id=239377256 node_paths=PackedStringArray("Idle", "enemy_")]
+script = ExtResource("5_efyi5")
+wait_time = 0.45
+dashing_speed = 850
+Idle = NodePath("../FollowPath")
+enemy_ = NodePath("../..")
+metadata/_custom_type_script = "uid://b5lqognjyej6y"
+
+[node name="TookHit" type="Node" parent="StateMachine" unique_id=376457571 node_paths=PackedStringArray("visuals", "hitbox", "FollowPath", "enemy_")]
+script = ExtResource("7_rslcp")
+visual_timer_wait_time = 0.1
+state_timer_wait_time = 2.0
+visuals = NodePath("../../Visuals")
+hitbox = NodePath("../../Visuals/HitBox")
+FollowPath = NodePath("../FollowPath")
+enemy_ = NodePath("../..")
+metadata/_custom_type_script = "uid://b5lqognjyej6y"
+
+[node name="detectionCast" type="RayCast2D" parent="." unique_id=1666046053]
+collision_mask = 9
+
+[node name="DashArea" type="Area2D" parent="." unique_id=1430133035]
+collision_mask = 9
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DashArea" unique_id=734685663]
+shape = SubResource("CircleShape2D_pj23d")
+
+[node name="Visuals" type="Node2D" parent="." unique_id=482335871]
+
+[node name="Head" type="MeshInstance2D" parent="Visuals" unique_id=606448977]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(16.000002, -5.966666e-14)
+rotation = -1.5707964
+scale = Vector2(32.500008, 32.53629)
+mesh = SubResource("PrismMesh_p7o00")
+
+[node name="Body" type="MeshInstance2D" parent="Visuals" unique_id=943960601]
+scale = Vector2(32.53629, 32.500008)
+mesh = SubResource("SphereMesh_p7o00")
+
+[node name="PointLight2D" type="PointLight2D" parent="Visuals" unique_id=1515697722]
+scale = Vector2(1.9999999, 1.9999999)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("5_jg7vu")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Visuals" unique_id=1829727804]
+scale = Vector2(8.134072, 8.125002)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("6_4humj")
+
+[node name="HitBox" type="Area2D" parent="Visuals" unique_id=266288771]
+collision_layer = 64
+collision_mask = 32
+script = ExtResource("9_efyi5")
+attackDamage = 1
+metadata/_custom_type_script = "uid://dmhyvv3i0gwk4"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/HitBox" unique_id=1365776044]
+position = Vector2(16, 0)
+shape = SubResource("CircleShape2D_wew43")
+
+[node name="visionCone" type="Area2D" parent="Visuals" unique_id=464785541]
+scale = Vector2(0.9999998, 0.9999999)
+collision_layer = 2
+collision_mask = 13
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Visuals/visionCone" unique_id=2138071926]
+polygon = PackedVector2Array(240.00006, -104.000015, 24.000006, -24.000004, 0, -56.000008, -24.000006, 0, 0, 56.000008, 24.000006, 24.000004, 232.00006, 104.000015, 256.00006, 64.00001, 272.00006, 0, 256.00006, -64.00001)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1542579118]
+visible = false
+modulate = Color(1, 1, 0, 1)
+position = Vector2(8.000001, 0)
+scale = Vector2(1000, 1000)
+texture = ExtResource("7_vpsq7")
+
+[node name="Label" type="Label" parent="." unique_id=380862030]
+offset_left = -16.0
+offset_top = -40.0
+offset_right = 24.0
+offset_bottom = -17.0
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=265167126]
+collision_layer = 128
+collision_mask = 16
+script = ExtResource("10_xn6gn")
+hitExceptions = [null]
+metadata/_custom_type_script = "uid://djd3qb3vcbyb1"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1497547976]
+shape = SubResource("CapsuleShape2D_hxrvi")
+
+[node name="SoundArea" type="Area2D" parent="." unique_id=817261145]
+script = ExtResource("13_k6jgc")
+metadata/_custom_type_script = "uid://1luamwpusv0q"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SoundArea" unique_id=500448578]
+shape = SubResource("CircleShape2D_t5fij")
+
+[connection signal="tookHit" from="HurtBox" to="." method="_on_hurt_box_took_hit"]
+[connection signal="heard_sound" from="SoundArea" to="StateMachine/FollowPath" method="heard_sound"]
+[connection signal="heard_sound" from="SoundArea" to="StateMachine/FollowSound" method="heard_sound"]

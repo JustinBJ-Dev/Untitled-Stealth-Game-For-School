@@ -2,11 +2,13 @@ extends EnemyState
 
 var navTimer : Timer
 var lookTimer : Timer
+var waitTimer : Timer
 var target_point : Marker2D
 
 var rotation_tween : Tween
 
 var at_point : bool = false
+var start_following : bool = false
 
 @export_category("Properties")
 @export var enemy_speed : int = 100
@@ -30,23 +32,30 @@ func _ready() -> void:
 	add_child(lookTimer)
 	lookTimer.timeout.connect(lookTimeout)
 	
+	waitTimer = Timer.new()
+	waitTimer.set_wait_time(0.25)
+	add_child(waitTimer)
+	waitTimer.timeout.connect(waitTimeout)
+	
 	target_point = Marker2D.new()
 	add_child(target_point)
 
 func enter_state() -> void:
-	enemy_.navigating = true
+	enemy_.navigating = false
+	enemy_.reset_velocity()
 	at_point = false
+	start_following = false
 	navTimer.start()
+	waitTimer.start()
 	enemy_.SPEED = enemy_speed
 
 func physics_update(_delta: float) -> void:
-	enemy_.visual.look_at(enemy_.global_position + enemy_.velocity)
-	is_detecting_player()
-	detect_is_at_point()
+	if start_following == true:
+		enemy_.visual.look_at(enemy_.global_position + enemy_.velocity)
+		is_detecting_player()
+		detect_is_at_point()
 
 func  detect_is_at_point() -> void:
-	
-	
 	if !at_point:
 		if enemy_.global_position.distance_to(target_point.global_position) <= 64:
 			enemy_.navigating = false
@@ -75,6 +84,11 @@ func handle_path() -> void:
 func navTimeout() -> void:
 	handle_path()
 	enemy_.set_target()
+
+func waitTimeout() -> void:
+	start_following = true
+	enemy_.navigating = true
+	waitTimer.stop()
 
 func lookTimeout() -> void:
 	switch_state.emit(FollowPath)
