@@ -15,8 +15,8 @@
 [sub_resource type="PrismMesh" id="PrismMesh_pj23d"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wew43"]
-radius = 32.0
-height = 64.0
+radius = 40.0
+height = 80.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_od3ui"]
 radius = 8.0

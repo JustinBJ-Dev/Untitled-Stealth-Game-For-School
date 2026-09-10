@@ -15,7 +15,7 @@ func _ready() -> void:
 	self.add_to_group("soundmaker")
 	
 	timer = Timer.new()
-	timer.set_wait_time(0.25)
+	timer.set_wait_time(0.5)
 	add_child(timer)
 	timer.timeout.connect(timeout)
 	timer.start()

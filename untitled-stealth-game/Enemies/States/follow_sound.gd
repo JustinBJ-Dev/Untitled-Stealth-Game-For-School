@@ -4,6 +4,8 @@ var navTimer : Timer
 var lookTimer : Timer
 var target_point : Marker2D
 
+var rotation_tween : Tween
+
 var at_point : bool = false
 
 @export_category("Properties")
@@ -32,6 +34,8 @@ func _ready() -> void:
 	add_child(target_point)
 
 func enter_state() -> void:
+	enemy_.navigating = true
+	at_point = false
 	navTimer.start()
 	enemy_.SPEED = enemy_speed
 
@@ -52,7 +56,7 @@ func  detect_is_at_point() -> void:
 			at_point = true
 
 func look_around() -> void:
-	var rotation_tween = get_tree().create_tween()
+	rotation_tween = get_tree().create_tween()
 	
 	rotation_tween.tween_property(enemy_.visual, "rotation", enemy_.visual.rotation + 2*(PI), look_timer_wait_time)
 	pass
@@ -63,7 +67,6 @@ func is_detecting_player() -> void:
 
 func heard_sound(sound : Sound) -> void:
 	target_point.global_position = sound.global_position
-	print(sound)
 	pass
 
 func handle_path() -> void:
@@ -77,6 +80,7 @@ func lookTimeout() -> void:
 	switch_state.emit(FollowPath)
 
 func exit_state() -> void:
-	at_point = false
+	if rotation_tween:
+		rotation_tween.stop()
 	lookTimer.stop()
 	navTimer.stop()

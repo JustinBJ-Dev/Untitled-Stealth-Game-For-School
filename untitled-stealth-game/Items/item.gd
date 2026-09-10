@@ -21,12 +21,13 @@ func _process(delta: float) -> void:
 func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
 	
+	
 	if pickedUp:
 		if pickUp_Point != null:
 			self.global_transform = pickUp_Point.global_transform
 			hitbox.disabled = true
 	else:
-		if velocity.round().x == 0 and velocity.round().y == 0:
+		if velocity.length() <= 50:
 			hitbox.disabled = true
 			if health == 0:
 				queue_free()

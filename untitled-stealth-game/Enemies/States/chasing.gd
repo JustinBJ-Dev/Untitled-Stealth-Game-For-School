@@ -31,6 +31,7 @@ func enter_state() -> void:
 	
 	enemy_.SPEED = enemy_speed
 	enemy_.target = enemy_.player_node
+	enemy_.navigating = true
 	navTimer.start()
 	
 	dashTimer = Timer.new()
