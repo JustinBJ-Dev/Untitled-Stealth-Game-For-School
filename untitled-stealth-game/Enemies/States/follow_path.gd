@@ -22,6 +22,7 @@ var kill_rotation : bool = false
 
 @export_category("States")
 @export var Chasing : State
+@export var FollowSound : State
 
 func _ready() -> void:
 	navTimer = Timer.new()
@@ -44,6 +45,7 @@ func _ready() -> void:
 	pass
 
 func enter_state() -> void:
+	enemy_.navigating = true
 	navTimer.start()
 	kill_rotation = false
 	enemy_.SPEED = enemy_speed
@@ -100,8 +102,9 @@ func rotate_path():
 	var direction = enemy_.global_position.direction_to(partolPath.get_point_position(current_point_number))
 	direction = direction.angle()
 	var dir_angle = lerp_angle(enemy_.visual.rotation, direction, 1)
-	var rotation_tween = get_tree().create_tween()
+	
 	if abs(dir_angle) - abs(enemy_.visual.rotation) >= 0.5 || abs(dir_angle) - abs(enemy_.visual.rotation) <= -0.5:
+		var rotation_tween = get_tree().create_tween()
 		if rotating == false:
 			rotating = true
 			rotation_tween.tween_property(enemy_.visual, "rotation", dir_angle, rotationTime)
@@ -114,7 +117,8 @@ func rotate_path():
 		return
 	pass
 
-func heard_sound() -> void:
+func heard_sound(sound : Sound) -> void:
+	switch_state.emit(FollowSound)
 	pass
 
 func navTimeout():

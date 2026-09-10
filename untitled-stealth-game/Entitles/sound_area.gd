@@ -10,6 +10,6 @@ func _process(delta: float) -> void:
 
 func check_for_sound(sound) -> void:
 	for i in get_overlapping_areas():
-		if sound == i:
+		if sound == i && sound is Sound:
 			emit_signal("heard_sound", sound)
 	pass

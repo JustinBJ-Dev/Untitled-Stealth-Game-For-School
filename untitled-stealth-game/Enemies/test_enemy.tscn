@@ -55,15 +55,18 @@ script = ExtResource("2_x4eh8")
 initail_state = NodePath("FollowPath")
 metadata/_custom_type_script = "uid://blokt4d45eotq"
 
-[node name="FollowPath" type="Node" parent="StateMachine" unique_id=41667267 node_paths=PackedStringArray("Chasing", "enemy_")]
+[node name="FollowPath" type="Node" parent="StateMachine" unique_id=41667267 node_paths=PackedStringArray("Chasing", "FollowSound", "enemy_")]
 script = ExtResource("4_j0tst")
 naviagation_timer_wait_time = 0.25
 Chasing = NodePath("../Chasing")
+FollowSound = NodePath("../FollowSound")
 enemy_ = NodePath("../..")
 metadata/_custom_type_script = "uid://b5lqognjyej6y"
 
-[node name="FollowSound" type="Node" parent="StateMachine" unique_id=1028627536 node_paths=PackedStringArray("enemy_")]
+[node name="FollowSound" type="Node" parent="StateMachine" unique_id=1028627536 node_paths=PackedStringArray("Chasing", "FollowPath", "enemy_")]
 script = ExtResource("4_xn6gn")
+Chasing = NodePath("../Chasing")
+FollowPath = NodePath("../FollowPath")
 enemy_ = NodePath("../..")
 metadata/_custom_type_script = "uid://bww1i0uvfgc1w"
 
@@ -186,3 +189,5 @@ metadata/_custom_type_script = "uid://1luamwpusv0q"
 shape = SubResource("CircleShape2D_t5fij")
 
 [connection signal="tookHit" from="HurtBox" to="." method="_on_hurt_box_took_hit"]
+[connection signal="heard_sound" from="SoundArea" to="StateMachine/FollowPath" method="heard_sound"]
+[connection signal="heard_sound" from="SoundArea" to="StateMachine/FollowSound" method="heard_sound"]
