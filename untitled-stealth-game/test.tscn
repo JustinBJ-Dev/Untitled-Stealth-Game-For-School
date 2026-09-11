@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://h4i2gpigi1o7" path="res://addons/Partol Points Plugin/Partol.gd" id="2_ppyta"]
 [ext_resource type="PackedScene" uid="uid://d2gkci8gyruaw" path="res://addons/Partol Points Plugin/partol_logic.tscn" id="3_ykrsh"]
 [ext_resource type="Texture2D" uid="uid://bl66vhhbqwtgq" path="res://Art/base_tilemap.png" id="6_g14j6"]
+[ext_resource type="PackedScene" uid="uid://dj6ebimynnh4o" path="res://Enemies/turret_enemy.tscn" id="7_ehkex"]
 [ext_resource type="PackedScene" uid="uid://cg6c87bmislur" path="res://Items/item.tscn" id="7_vbegm"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_37kl0"]
@@ -141,9 +142,12 @@ metadata/_edit_lock_ = true
 [node name="PartolLogic" parent="Partol" unique_id=835768422 instance=ExtResource("3_ykrsh")]
 
 [node name="testEnemy" parent="Partol/PartolLogic" unique_id=1369649150 node_paths=PackedStringArray("partol_path", "target") instance=ExtResource("2_8uh7m")]
-position = Vector2(1029, 192)
+position = Vector2(1400, 248)
 partol_path = NodePath("..")
 target = NodePath("../../../player")
+
+[node name="dashingEnemy" parent="Partol/PartolLogic" unique_id=825911701 instance=ExtResource("7_ehkex")]
+position = Vector2(64, 568)
 
 [node name="Item" parent="." unique_id=1206623203 instance=ExtResource("7_vbegm")]
 position = Vector2(344, 240)
