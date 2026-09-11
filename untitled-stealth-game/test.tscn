@@ -148,7 +148,20 @@ target = NodePath("../../../player")
 
 [node name="turretEnemy" parent="Partol/PartolLogic" unique_id=1710007620 instance=ExtResource("7_ehkex")]
 position = Vector2(224, 104)
+
+[node name="Shoot" parent="Partol/PartolLogic/turretEnemy/StateMachine" parent_id_path=PackedInt32Array(1710007620, 437612346) index="2" unique_id=1083955261]
+shotDamage = 0.0
+
+[node name="Visuals" parent="Partol/PartolLogic/turretEnemy" index="5" unique_id=482335871]
+rotation = 1.5707964
+
+[node name="PointLight2D2" parent="Partol/PartolLogic/turretEnemy" index="7" unique_id=1829727804]
+rotation = 1.5707964
+
+[node name="visionCone" parent="Partol/PartolLogic/turretEnemy" index="9" unique_id=464785541]
 rotation = 1.5707964
 
 [node name="Item" parent="." unique_id=1206623203 instance=ExtResource("7_vbegm")]
 position = Vector2(344, 240)
+
+[editable path="Partol/PartolLogic/turretEnemy"]
