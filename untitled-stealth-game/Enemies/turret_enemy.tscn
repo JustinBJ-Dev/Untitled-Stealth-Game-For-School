@@ -5,9 +5,10 @@
 [ext_resource type="Script" uid="uid://q1amah0t1201" path="res://Enemies/States/took_hit.gd" id="3_pamp8"]
 [ext_resource type="Script" uid="uid://b7fxurbam85y8" path="res://Enemies/States/searching.gd" id="4_egqi6"]
 [ext_resource type="Texture2D" uid="uid://dusaa0rf14sqo" path="res://Lighting/spotlight.png" id="4_vll7h"]
-[ext_resource type="Script" uid="uid://b5lqognjyej6y" path="res://StateMachine/EnemyState.gd" id="5_pamp8"]
+[ext_resource type="Script" uid="uid://4qyg0ldvrsct" path="res://Enemies/States/shoot.gd" id="5_pamp8"]
 [ext_resource type="Texture2D" uid="uid://d2kllw61p3vvr" path="res://Lighting/flashlight.png" id="5_q3q5s"]
 [ext_resource type="Script" uid="uid://dmhyvv3i0gwk4" path="res://Entitles/HitBox.gd" id="6_u4e55"]
+[ext_resource type="PackedScene" uid="uid://cd7h7t1wkh2mo" path="res://Entitles/bullet.tscn" id="6_vll7h"]
 [ext_resource type="Texture2D" uid="uid://bshvkkqg3lixw" path="res://square.png" id="7_2x7a5"]
 [ext_resource type="Script" uid="uid://djd3qb3vcbyb1" path="res://Entitles/HurtBox.gd" id="8_8wat5"]
 [ext_resource type="Script" uid="uid://1luamwpusv0q" path="res://Entitles/sound_area.gd" id="9_yigcc"]
@@ -38,7 +39,7 @@ collision_mask = 9
 script = ExtResource("1_a54xr")
 nav2d = NodePath("NavigationAgent2D")
 detectionCast = NodePath("detectionCast")
-detectionArea = NodePath("Visuals/visionCone")
+detectionArea = NodePath("visionCone")
 visual = NodePath("Visuals")
 stateMachine = NodePath("StateMachine")
 tookHit_State = NodePath("StateMachine/TookHit")
@@ -58,17 +59,25 @@ script = ExtResource("3_pamp8")
 visual_timer_wait_time = 0.1
 state_timer_wait_time = 2.0
 visuals = NodePath("../../Visuals")
-hitbox = NodePath("../../Visuals/HitBox")
+hitbox = NodePath("../../HitBox")
 enemy_ = NodePath("../..")
 metadata/_custom_type_script = "uid://b5lqognjyej6y"
 
-[node name="Searching" type="Node" parent="StateMachine" unique_id=1753397048 node_paths=PackedStringArray("enemy_")]
+[node name="Searching" type="Node" parent="StateMachine" unique_id=1753397048 node_paths=PackedStringArray("Shoot", "enemy_")]
 script = ExtResource("4_egqi6")
+Shoot = NodePath("../Shoot")
 enemy_ = NodePath("../..")
 metadata/_custom_type_script = "uid://b5lqognjyej6y"
 
-[node name="Shoot" type="Node" parent="StateMachine" unique_id=1083955261]
+[node name="Shoot" type="Node" parent="StateMachine" unique_id=1083955261 node_paths=PackedStringArray("Search", "enemy_")]
 script = ExtResource("5_pamp8")
+cooldown_timer_wait_time = 1.5
+Bullet = ExtResource("6_vll7h")
+numberOf_Shots = 2
+timeBetween_Shots = 7
+shotDamage = 1
+Search = NodePath("../Searching")
+enemy_ = NodePath("../..")
 metadata/_custom_type_script = "uid://b5lqognjyej6y"
 
 [node name="detectionCast" type="RayCast2D" parent="." unique_id=1666046053]
@@ -83,22 +92,8 @@ shape = SubResource("CircleShape2D_pj23d")
 
 [node name="Visuals" type="Node2D" parent="." unique_id=482335871]
 
-[node name="PointLight2D" type="PointLight2D" parent="Visuals" unique_id=1515697722]
-scale = Vector2(1.9999999, 1.9999999)
-blend_mode = 2
-shadow_enabled = true
-texture = ExtResource("4_vll7h")
-
-[node name="PointLight2D2" type="PointLight2D" parent="Visuals" unique_id=1829727804]
-position = Vector2(-7.6293945e-06, 0)
-scale = Vector2(16.726847, 8.125002)
-color = Color(1, 0, 0, 1)
-blend_mode = 2
-shadow_enabled = true
-texture = ExtResource("5_q3q5s")
-
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Visuals" unique_id=679222513]
-modulate = Color(1, 0, 0, 1)
+modulate = Color(0, 0.43137255, 1, 1)
 position = Vector2(15.75, 0)
 scale = Vector2(32.5, 8)
 mesh = SubResource("QuadMesh_p7o00")
@@ -107,7 +102,20 @@ mesh = SubResource("QuadMesh_p7o00")
 scale = Vector2(32.53629, 32.500008)
 mesh = SubResource("SphereMesh_p7o00")
 
-[node name="HitBox" type="Area2D" parent="Visuals" unique_id=266288771]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1515697722]
+scale = Vector2(1.9999999, 1.9999999)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("4_vll7h")
+
+[node name="PointLight2D2" type="PointLight2D" parent="." unique_id=1829727804]
+position = Vector2(32, 0)
+scale = Vector2(16.726847, 8.125002)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("5_q3q5s")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=266288771]
 collision_layer = 64
 collision_mask = 32
 script = ExtResource("6_u4e55")
@@ -115,23 +123,23 @@ attackDamage = 1
 metadata/_custom_type_script = "uid://dmhyvv3i0gwk4"
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/HitBox" unique_id=1365776044]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1365776044]
 position = Vector2(16, 0)
 shape = SubResource("CircleShape2D_wew43")
 
-[node name="visionCone" type="Area2D" parent="Visuals" unique_id=464785541]
+[node name="visionCone" type="Area2D" parent="." unique_id=464785541]
 scale = Vector2(0.9999998, 0.9999999)
 collision_layer = 2
 collision_mask = 13
 metadata/_edit_lock_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Visuals/visionCone" unique_id=2138071926]
-polygon = PackedVector2Array(344.0001, -96.000015, 24.000006, -24.000004, 0, -56.000008, -24.000006, 0, 0, 56.000008, 24.000006, 24.000004, 344.0001, 96.000015, 360.0001, 64.00001, 384.0001, 0, 368.0001, -64.00001)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="visionCone" unique_id=2138071926]
+polygon = PackedVector2Array(912.00024, -192.00003, 24.000006, -24.000004, 0, -56.000008, -24.000006, 0, 0, 56.000008, 24.000006, 24.000004, 928.00024, 192.00003, 952.00024, 88.00001, 960.00024, 0, 952.00024, -96.000015)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1542579118]
 visible = false
 modulate = Color(1, 1, 0, 1)
-position = Vector2(8.000001, 0)
+position = Vector2(432, 24)
 scale = Vector2(1000, 1000)
 texture = ExtResource("7_2x7a5")
 
@@ -153,6 +161,7 @@ metadata/_edit_lock_ = true
 shape = SubResource("CapsuleShape2D_hxrvi")
 
 [node name="SoundArea" type="Area2D" parent="." unique_id=817261145]
+collision_layer = 2
 script = ExtResource("9_yigcc")
 metadata/_custom_type_script = "uid://1luamwpusv0q"
 

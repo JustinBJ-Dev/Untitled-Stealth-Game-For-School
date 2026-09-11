@@ -1,7 +1,8 @@
 extends EnemyState
 
+@export var Shoot : State
 
-# Called when the node enters the scene tree for the first time.
 func update(delta: float) -> void:
-	print(enemy_.is_detecting_player)
+	if enemy_.is_detecting_player:
+		switch_state.emit(Shoot)
 	pass

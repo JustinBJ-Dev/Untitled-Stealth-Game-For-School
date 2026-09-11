@@ -93,7 +93,7 @@ size = Vector2(40, 384)
 navigation_polygon = SubResource("NavigationPolygon_37kl0")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=342137510]
-modulate = Color(0.36681426, 9.168908e-05, 0.36681154, 1)
+modulate = Color(0.7387694, 0.58814853, 0.9745365, 1)
 position = Vector2(552, 312)
 scale = Vector2(1500, 1500)
 texture = ExtResource("1_ykrsh")
@@ -141,13 +141,14 @@ metadata/_edit_lock_ = true
 
 [node name="PartolLogic" parent="Partol" unique_id=835768422 instance=ExtResource("3_ykrsh")]
 
-[node name="testEnemy" parent="Partol/PartolLogic" unique_id=1369649150 node_paths=PackedStringArray("partol_path", "target") instance=ExtResource("2_8uh7m")]
-position = Vector2(1400, 248)
+[node name="dashingEnemy" parent="Partol/PartolLogic" unique_id=1369649150 node_paths=PackedStringArray("partol_path", "target") instance=ExtResource("2_8uh7m")]
+position = Vector2(1029, 192)
 partol_path = NodePath("..")
 target = NodePath("../../../player")
 
-[node name="dashingEnemy" parent="Partol/PartolLogic" unique_id=825911701 instance=ExtResource("7_ehkex")]
-position = Vector2(64, 568)
+[node name="turretEnemy" parent="Partol/PartolLogic" unique_id=1710007620 instance=ExtResource("7_ehkex")]
+position = Vector2(224, 104)
+rotation = 1.5707964
 
 [node name="Item" parent="." unique_id=1206623203 instance=ExtResource("7_vbegm")]
 position = Vector2(344, 240)

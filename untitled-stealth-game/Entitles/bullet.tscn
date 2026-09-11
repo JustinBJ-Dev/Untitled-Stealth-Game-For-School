@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cd7h7t1wkh2mo"]
+
+[ext_resource type="Script" uid="uid://clephwh1vusm4" path="res://Entitles/bullet.gd" id="1_jqjdy"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_p7o00"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wew43"]
+radius = 4.0
+
+[node name="Bullet" type="Area2D" unique_id=889747723]
+collision_layer = 2
+collision_mask = 32
+script = ExtResource("1_jqjdy")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1303603507]
+rotation = -1.5707964
+scale = Vector2(8, 24.5)
+mesh = SubResource("PrismMesh_p7o00")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1420419525]
+position = Vector2(-8, 0)
+shape = SubResource("CircleShape2D_wew43")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

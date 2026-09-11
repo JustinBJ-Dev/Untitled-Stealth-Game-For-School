@@ -37,6 +37,8 @@ func detect_player() -> void:
 			for i in detectionArea.get_overlapping_areas():
 				if i.is_in_group("player") == true:
 					is_detecting_player = true
+				else: 
+					is_detecting_player = false
 		else:
 			is_detecting_player = false
 
