@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://vecrvw7arhao"]
 
+[ext_resource type="Script" uid="uid://c3xk3hlqktsre" path="res://levels/base_level.gd" id="1_46036"]
 [ext_resource type="Texture2D" uid="uid://bshvkkqg3lixw" path="res://square.png" id="1_satuh"]
 [ext_resource type="TileSet" uid="uid://b413unu3axh5k" path="res://Art/base_tile_set.tres" id="2_p5284"]
 [ext_resource type="Script" uid="uid://h4i2gpigi1o7" path="res://addons/Partol Points Plugin/Partol.gd" id="3_46036"]
@@ -15,6 +16,7 @@ source_geometry_group_name = &"navigation_collision"
 agent_radius = 24.0
 
 [node name="BaseLevel" type="Node2D" unique_id=532202032]
+script = ExtResource("1_46036")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1245080922]
 navigation_polygon = SubResource("NavigationPolygon_0rg8l")
