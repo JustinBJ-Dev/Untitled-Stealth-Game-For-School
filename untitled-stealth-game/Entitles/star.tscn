@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://b5hn5guoojx3x"]
+
+[ext_resource type="Script" uid="uid://tvloh3rceg6n" path="res://Entitles/star.gd" id="1_i215b"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_pj23d"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_p7o00"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_wew43"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p7o00"]
+radius = 24.0
+
+[node name="Star" type="Area2D" unique_id=1702600007]
+collision_layer = 4096
+script = ExtResource("1_i215b")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1753862380]
+position = Vector2(-9.536743e-07, 7.75)
+scale = Vector2(47.999996, 16.5)
+mesh = SubResource("PrismMesh_pj23d")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="." unique_id=1080686013]
+rotation = 3.1415927
+scale = Vector2(31.999998, 31.999998)
+mesh = SubResource("PrismMesh_p7o00")
+
+[node name="MeshInstance2D3" type="MeshInstance2D" parent="." unique_id=1405834278]
+position = Vector2(0, 15.999999)
+scale = Vector2(32.000004, 26.809729)
+mesh = SubResource("PrismMesh_wew43")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=617895409]
+shape = SubResource("CircleShape2D_p7o00")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

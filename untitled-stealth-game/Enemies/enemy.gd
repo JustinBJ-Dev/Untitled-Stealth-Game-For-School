@@ -10,6 +10,7 @@ extends CharacterBody2D
 @export var visual : Node2D
 @export var stateMachine : StateMachine
 @export var tookHit_State : State
+@export var hitBox : HitBox
 @export_category("Propertires")
 @export var SPEED : int = 100
 

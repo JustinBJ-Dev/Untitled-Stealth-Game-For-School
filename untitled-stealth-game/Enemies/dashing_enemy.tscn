@@ -34,7 +34,7 @@ height = 48.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_t5fij"]
 radius = 384.0
 
-[node name="dashingEnemy" type="CharacterBody2D" unique_id=1369649150 node_paths=PackedStringArray("nav2d", "detectionCast", "detectionArea", "visual", "stateMachine", "tookHit_State")]
+[node name="dashingEnemy" type="CharacterBody2D" unique_id=1369649150 node_paths=PackedStringArray("nav2d", "detectionCast", "detectionArea", "visual", "stateMachine", "tookHit_State", "hitBox")]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_ghv5c")
@@ -44,6 +44,7 @@ detectionArea = NodePath("Visuals/visionCone")
 visual = NodePath("Visuals")
 stateMachine = NodePath("StateMachine")
 tookHit_State = NodePath("StateMachine/TookHit")
+hitBox = NodePath("Visuals/HitBox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1860920870]
 shape = SubResource("CircleShape2D_p7o00")
@@ -140,7 +141,8 @@ texture = ExtResource("6_4humj")
 collision_layer = 64
 collision_mask = 32
 script = ExtResource("9_efyi5")
-attackDamage = 1
+attackDamage = 2
+disabled = true
 metadata/_custom_type_script = "uid://dmhyvv3i0gwk4"
 metadata/_edit_lock_ = true
 
@@ -155,7 +157,7 @@ collision_mask = 13
 metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Visuals/visionCone" unique_id=2138071926]
-polygon = PackedVector2Array(240.00006, -104.000015, 24.000006, -24.000004, 0, -56.000008, -24.000006, 0, 0, 56.000008, 24.000006, 24.000004, 232.00006, 104.000015, 256.00006, 64.00001, 272.00006, 0, 256.00006, -64.00001)
+polygon = PackedVector2Array(240.00006, -104.000015, 24.000006, -24.000004, 0, -56.000008, -24.000006, 0, 0, 56.000008, 24.000006, 24.000004, 232.00006, 104.000015, 272.00006, 64.00001, 320.00006, 0, 272.00006, -64.00001)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1542579118]
 visible = false
@@ -165,6 +167,7 @@ scale = Vector2(1000, 1000)
 texture = ExtResource("7_vpsq7")
 
 [node name="Label" type="Label" parent="." unique_id=380862030]
+visible = false
 offset_left = -16.0
 offset_top = -40.0
 offset_right = 24.0

@@ -5,7 +5,7 @@ var dirY: float
 var playerInput  : Vector2
 var playerDirection : Vector2
 
-var playerHealth : float = 5.0: set = _take_damage
+var playerHealth : float = 10.0: set = _take_damage
 var playerEnergy : float = 100
 
 var hasItems : bool = true
@@ -16,8 +16,8 @@ var hasItems : bool = true
 func _process(_delta):
 	dirX = Input.get_axis("input_left", "input_right")
 	dirY = Input.get_axis("input_up", "input_down")
-	playerInput.x = dirX
-	playerInput.y = dirY
+	playerInput.x = round(dirX)
+	playerInput.y = round(dirY)
 	playerInput = playerInput.normalized()
 	playerDirection = Vector2(cos(rotation),sin(rotation)).normalized()
 	

@@ -12,6 +12,7 @@ var dashingTimer : Timer
 
 func enter_state() -> void:
 	enemy_.set_collision_mask_value(1, false)
+	enemy_.hitBox.disabled = false
 	
 	dashingTimer = Timer.new()
 	dashingTimer.set_wait_time(wait_time)
@@ -37,6 +38,7 @@ func timeout() -> void:
 		switch_state.emit(Idle)
 
 func exit_state() -> void:
+	enemy_.hitBox.disabled = true
 	enemy_.navigating = true
 	dashingTimer.queue_free()
 	enemy_.set_collision_mask_value(1, true)

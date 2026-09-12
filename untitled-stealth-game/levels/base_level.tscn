@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://vecrvw7arhao"]
+
+[ext_resource type="Texture2D" uid="uid://bshvkkqg3lixw" path="res://square.png" id="1_satuh"]
+[ext_resource type="TileSet" uid="uid://b413unu3axh5k" path="res://Art/base_tile_set.tres" id="2_p5284"]
+[ext_resource type="Script" uid="uid://h4i2gpigi1o7" path="res://addons/Partol Points Plugin/Partol.gd" id="3_46036"]
+[ext_resource type="PackedScene" uid="uid://b2huk5v86713o" path="res://Player/player.tscn" id="3_p5284"]
+[ext_resource type="PackedScene" uid="uid://d2gkci8gyruaw" path="res://addons/Partol Points Plugin/partol_logic.tscn" id="4_maq6b"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_0rg8l"]
+vertices = PackedVector2Array(1128.2891, 624, 24, 624, 24, 24, 1135.7031, 24)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, 0, 1160, 0, 1152, 648, 0, 648)])
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation_collision"
+agent_radius = 24.0
+
+[node name="BaseLevel" type="Node2D" unique_id=532202032]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1245080922]
+navigation_polygon = SubResource("NavigationPolygon_0rg8l")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=768266200]
+modulate = Color(0.7387694, 0.58814853, 0.9745365, 1)
+position = Vector2(552, 312)
+scale = Vector2(1500, 1500)
+texture = ExtResource("1_satuh")
+metadata/_edit_lock_ = true
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1313902803 groups=["navigation_collision"]]
+tile_set = ExtResource("2_p5284")
+navigation_visibility_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="player" parent="." unique_id=1967735014 instance=ExtResource("3_p5284")]
+
+[node name="Partol" type="Line2D" parent="." unique_id=1481712036]
+position = Vector2(-8, 0)
+width = 5.0
+script = ExtResource("3_46036")
+metadata/_custom_type_script = "uid://h4i2gpigi1o7"
+metadata/_edit_lock_ = true
+
+[node name="PartolLogic" parent="Partol" unique_id=835768422 instance=ExtResource("4_maq6b")]

@@ -49,7 +49,6 @@ func enter_state() -> void:
 	navTimer.start()
 	enemy_.SPEED = enemy_speed
 	
-	
 	determine_path_on_enter()
 
 func determine_path_on_enter() -> void: #If the last position on the path is closer than the closet point, the enemy will go the last position on the graph.
@@ -139,8 +138,8 @@ func is_detecting_player() -> void:
 		switch_state.emit(Chasing)
 
 func exit_state() -> void:
-	
-	rotation_tween.stop()
+	if rotation_tween:
+		rotation_tween.stop()
 	navTimer.stop()
 	rotationTimer.stop()
 	rotating = false

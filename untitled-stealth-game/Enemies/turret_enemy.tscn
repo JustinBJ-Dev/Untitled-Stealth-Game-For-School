@@ -34,8 +34,8 @@ height = 48.0
 radius = 384.0
 
 [node name="turretEnemy" type="CharacterBody2D" unique_id=1369649150 node_paths=PackedStringArray("nav2d", "detectionCast", "detectionArea", "visual", "stateMachine", "tookHit_State")]
-collision_layer = 2
-collision_mask = 9
+collision_layer = 10
+collision_mask = 8
 script = ExtResource("1_a54xr")
 nav2d = NodePath("NavigationAgent2D")
 detectionCast = NodePath("detectionCast")
@@ -54,12 +54,13 @@ script = ExtResource("2_egqi6")
 initail_state = NodePath("Searching")
 metadata/_custom_type_script = "uid://blokt4d45eotq"
 
-[node name="TookHit" type="Node" parent="StateMachine" unique_id=376457571 node_paths=PackedStringArray("visuals", "hitbox", "enemy_")]
+[node name="TookHit" type="Node" parent="StateMachine" unique_id=376457571 node_paths=PackedStringArray("visuals", "hitbox", "FollowPath", "enemy_")]
 script = ExtResource("3_pamp8")
 visual_timer_wait_time = 0.1
 state_timer_wait_time = 2.0
 visuals = NodePath("../../Visuals")
 hitbox = NodePath("../../HitBox")
+FollowPath = NodePath("../Searching")
 enemy_ = NodePath("../..")
 metadata/_custom_type_script = "uid://b5lqognjyej6y"
 
@@ -75,6 +76,7 @@ cooldown_timer_wait_time = 1.5
 Bullet = ExtResource("6_vll7h")
 numberOf_Shots = 2
 timeBetween_Shots = 7
+shotDamage = 1.0
 Search = NodePath("../Searching")
 enemy_ = NodePath("../..")
 metadata/_custom_type_script = "uid://b5lqognjyej6y"
@@ -109,7 +111,7 @@ texture = ExtResource("4_vll7h")
 
 [node name="PointLight2D2" type="PointLight2D" parent="." unique_id=1829727804]
 position = Vector2(-3.8146973e-06, 0)
-scale = Vector2(16.726847, 8.125002)
+scale = Vector2(16.727, 12)
 blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("5_q3q5s")
@@ -133,11 +135,11 @@ collision_mask = 13
 metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="visionCone" unique_id=2138071926]
-polygon = PackedVector2Array(912.00024, -192.00003, 24.000006, -24.000004, 0, -56.000008, -24.000006, 0, 0, 56.000008, 24.000006, 24.000004, 928.00024, 192.00003, 952.00024, 88.00001, 960.00024, 0, 952.00024, -96.000015)
+polygon = PackedVector2Array(856.0002, -288.00003, 24.000006, -24.000004, 0, -56.000008, -24.000006, 0, 0, 56.000008, 24.000006, 24.000004, 840.0002, 264.00003, 888.0002, 80.00001, 896.00024, 0, 896.00024, -96.000015)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1542579118]
 visible = false
-modulate = Color(1, 1, 0, 1)
+modulate = Color(1, 1, 0, 0.3647059)
 position = Vector2(432, 24)
 scale = Vector2(1000, 1000)
 texture = ExtResource("7_2x7a5")

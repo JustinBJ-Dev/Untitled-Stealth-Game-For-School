@@ -4,6 +4,7 @@ extends PlayerState
 @export var dashing_speed : int = 750 
 
 var dashingTimer : Timer
+var direction : Vector2
 
 @export_category("States")
 @export var Idle : State
@@ -16,11 +17,12 @@ func enter_state() -> void:
 	dashingTimer.timeout.connect(timeout)
 	dashingTimer.start()
 	
+	direction = player_.playerDirection
 	player_.playerEnergy = 0
 	pass
 
 func physics_update(delta: float) -> void:
-	player_.velocity = player_.playerDirection * dashing_speed
+	player_.velocity = direction * dashing_speed
 
 func timeout() -> void:
 	switch_state.emit(Idle)

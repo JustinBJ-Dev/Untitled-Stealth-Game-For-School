@@ -47,6 +47,7 @@ func _ready() -> void:
 	visualTimer.timeout.connect(visualTimer_Timeout)
 
 func enter_state() -> void:
+	line.modulate = Color(0.0, 0.431, 1.0)
 	enemy_.target = enemy_.player_node
 	
 	enemyPoint = enemy_.global_position
@@ -101,10 +102,7 @@ func shoot() -> void:
 	temp.set("timer_Waittime", 100)
 	temp.set("global_position", enemy_.global_position)
 	temp.set("area_direction", direction)
-	temp.set("rotation", enemy_.rotation)
-	temp.set_collision_layer_value(1, false)
-	temp.set_collision_layer_value(2, true)
-	temp.set_collision_mask_value(1, true)
+	temp.set("rotation", enemy_.visual.rotation)
 	enemy_.add_sibling(temp)
 
 func cooldownTimeout() -> void:
@@ -113,6 +111,7 @@ func cooldownTimeout() -> void:
 
 func visualTimer_Timeout() -> void:
 	if blinks < 4:
+		line.modulate = Color(0.0, 0.431, 1.0)
 		if line.visible == true:
 			line.visible = false
 		elif line.visible == false:
@@ -120,6 +119,7 @@ func visualTimer_Timeout() -> void:
 		start_visuals = false
 		blinks += 1
 	else:
+		line.modulate = Color(1.0, 0.0, 0.0, 1.0)
 		cooldownTimer.start()
 		line.visible = true
 		canShoot = true
