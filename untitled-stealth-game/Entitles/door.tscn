@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b06d0buy11qhi"]
+
+[ext_resource type="Texture2D" uid="uid://dusaa0rf14sqo" path="res://Lighting/spotlight.png" id="1_i4di4"]
+[ext_resource type="Script" uid="uid://b1v8ac5imaej3" path="res://Entitles/door.gd" id="1_qb1o7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p7o00"]
+radius = 32.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_p7o00"]
+
+[node name="Door" type="Area2D" unique_id=466779108]
+modulate = Color(0.49411765, 0.35686275, 0.1882353, 1)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_qb1o7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=927352004]
+shape = SubResource("CircleShape2D_p7o00")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1873378088]
+scale = Vector2(64.57258, 64.50001)
+mesh = SubResource("SphereMesh_p7o00")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1972995757]
+scale = Vector2(3, 3)
+texture = ExtResource("1_i4di4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

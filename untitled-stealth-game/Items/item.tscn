@@ -6,10 +6,10 @@
 [sub_resource type="SphereMesh" id="SphereMesh_p7o00"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p7o00"]
-radius = 8.0
+radius = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pj23d"]
-radius = 16.0
+radius = 24.0
 
 [node name="Item" type="CharacterBody2D" unique_id=1206623203]
 disable_mode = 2
@@ -21,8 +21,8 @@ friction = 0.075
 speed = 1000.0
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1045466954]
-position = Vector2(-3.2782555e-07, 2.026558e-06)
-scale = Vector2(16.018143, 16.000004)
+position = Vector2(1.495523e-07, 2.026558e-06)
+scale = Vector2(16.018145, 16.000004)
 mesh = SubResource("SphereMesh_p7o00")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1472827102]

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b5hn5guoojx3x"]
 
 [ext_resource type="Script" uid="uid://tvloh3rceg6n" path="res://Entitles/star.gd" id="1_i215b"]
+[ext_resource type="Texture2D" uid="uid://dusaa0rf14sqo" path="res://Lighting/spotlight.png" id="2_k8hn2"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_pj23d"]
 
@@ -29,6 +30,12 @@ mesh = SubResource("PrismMesh_p7o00")
 position = Vector2(0, 15.999999)
 scale = Vector2(32.000004, 26.809729)
 mesh = SubResource("PrismMesh_wew43")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1028637095]
+position = Vector2(0, 7.9999995)
+scale = Vector2(1.25, 1.25)
+energy = 0.5
+texture = ExtResource("2_k8hn2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=617895409]
 shape = SubResource("CircleShape2D_p7o00")

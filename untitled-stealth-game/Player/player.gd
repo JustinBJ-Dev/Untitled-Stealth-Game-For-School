@@ -39,3 +39,7 @@ func _physics_process(_delta: float) -> void:
 func _take_damage(damage) -> void:
 	playerHealth -= damage
 	
+
+func die() -> void:
+	print("Death")
+	get_tree().reload_current_scene()

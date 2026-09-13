@@ -1,11 +1,14 @@
 [gd_scene format=3 uid="uid://vecrvw7arhao"]
 
-[ext_resource type="Script" uid="uid://c3xk3hlqktsre" path="res://levels/base_level.gd" id="1_46036"]
+[ext_resource type="Script" uid="uid://c3xk3hlqktsre" path="res://levels/BaseLevel/base_level.gd" id="1_46036"]
 [ext_resource type="Texture2D" uid="uid://bshvkkqg3lixw" path="res://square.png" id="1_satuh"]
 [ext_resource type="TileSet" uid="uid://b413unu3axh5k" path="res://Art/base_tile_set.tres" id="2_p5284"]
 [ext_resource type="Script" uid="uid://h4i2gpigi1o7" path="res://addons/Partol Points Plugin/Partol.gd" id="3_46036"]
 [ext_resource type="PackedScene" uid="uid://b2huk5v86713o" path="res://Player/player.tscn" id="3_p5284"]
+[ext_resource type="PackedScene" uid="uid://b06d0buy11qhi" path="res://Entitles/door.tscn" id="4_6w4ab"]
 [ext_resource type="PackedScene" uid="uid://d2gkci8gyruaw" path="res://addons/Partol Points Plugin/partol_logic.tscn" id="4_maq6b"]
+[ext_resource type="PackedScene" uid="uid://cg6c87bmislur" path="res://Items/item.tscn" id="7_0rg8l"]
+[ext_resource type="PackedScene" uid="uid://b5hn5guoojx3x" path="res://Entitles/star.tscn" id="8_6w4ab"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_0rg8l"]
 vertices = PackedVector2Array(1128.2891, 624, 24, 624, 24, 24, 1135.7031, 24)
@@ -15,11 +18,9 @@ source_geometry_mode = 1
 source_geometry_group_name = &"navigation_collision"
 agent_radius = 24.0
 
-[node name="BaseLevel" type="Node2D" unique_id=532202032]
+[node name="BaseLevel" type="Node2D" unique_id=532202032 node_paths=PackedStringArray("door")]
 script = ExtResource("1_46036")
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1245080922]
-navigation_polygon = SubResource("NavigationPolygon_0rg8l")
+door = NodePath("Door")
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=768266200]
@@ -29,10 +30,20 @@ scale = Vector2(1500, 1500)
 texture = ExtResource("1_satuh")
 metadata/_edit_lock_ = true
 
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=251905576]
+color = Color(0.27569968, 0.27569968, 0.27569965, 1)
+metadata/_edit_lock_ = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1245080922]
+navigation_polygon = SubResource("NavigationPolygon_0rg8l")
+metadata/_edit_lock_ = true
+
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1313902803 groups=["navigation_collision"]]
 tile_set = ExtResource("2_p5284")
 navigation_visibility_mode = 1
 metadata/_edit_lock_ = true
+
+[node name="Door" parent="." unique_id=466779108 instance=ExtResource("4_6w4ab")]
 
 [node name="player" parent="." unique_id=1967735014 instance=ExtResource("3_p5284")]
 
@@ -44,3 +55,13 @@ metadata/_custom_type_script = "uid://h4i2gpigi1o7"
 metadata/_edit_lock_ = true
 
 [node name="PartolLogic" parent="Partol" unique_id=835768422 instance=ExtResource("4_maq6b")]
+
+[node name="Itens" type="Node" parent="." unique_id=742975273]
+
+[node name="Item" parent="Itens" unique_id=1206623203 instance=ExtResource("7_0rg8l")]
+
+[node name="Star" parent="." unique_id=1702600007 instance=ExtResource("8_6w4ab")]
+
+[node name="Star2" parent="." unique_id=1594615601 instance=ExtResource("8_6w4ab")]
+
+[node name="Star3" parent="." unique_id=263491123 instance=ExtResource("8_6w4ab")]
