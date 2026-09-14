@@ -141,14 +141,13 @@ layout_mode = 2
 max_value = 10.0
 value = 3.0
 
-[node name="Label" type="Label" parent="Player UI/Control/HBoxContainer/VBoxContainer" unique_id=1302051886]
-visible = false
-layout_mode = 2
-text = "Health Bar"
-
 [node name="energyBar" type="ProgressBar" parent="Player UI/Control/HBoxContainer/VBoxContainer" unique_id=1552292202]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Player UI/Control/HBoxContainer/VBoxContainer" unique_id=1302051886]
+layout_mode = 2
+text = "Health Bar"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1875369770]
 position = Vector2(12, 0)

@@ -33,14 +33,15 @@ height = 48.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_t5fij"]
 radius = 384.0
 
-[node name="turretEnemy" type="CharacterBody2D" unique_id=1369649150 node_paths=PackedStringArray("nav2d", "detectionCast", "detectionArea", "visual", "stateMachine", "tookHit_State")]
+[node name="turretEnemy" type="CharacterBody2D" unique_id=1369649150 node_paths=PackedStringArray("nav2d", "detectionCast", "detectionArea", "visual", "visualContainer", "stateMachine", "tookHit_State")]
 collision_layer = 10
 collision_mask = 8
 script = ExtResource("1_a54xr")
 nav2d = NodePath("NavigationAgent2D")
 detectionCast = NodePath("detectionCast")
-detectionArea = NodePath("visionCone")
-visual = NodePath("Visuals")
+detectionArea = NodePath("VisualContainer/visionCone")
+visual = NodePath("VisualContainer/Visuals")
+visualContainer = NodePath("VisualContainer")
 stateMachine = NodePath("StateMachine")
 tookHit_State = NodePath("StateMachine/TookHit")
 
@@ -58,8 +59,8 @@ metadata/_custom_type_script = "uid://blokt4d45eotq"
 script = ExtResource("3_pamp8")
 visual_timer_wait_time = 0.1
 state_timer_wait_time = 2.0
-visuals = NodePath("../../Visuals")
-hitbox = NodePath("../../HitBox")
+visuals = NodePath("../../VisualContainer/Visuals")
+hitbox = NodePath("../../VisualContainer/HitBox")
 FollowPath = NodePath("../Searching")
 enemy_ = NodePath("../..")
 metadata/_custom_type_script = "uid://b5lqognjyej6y"
@@ -91,32 +92,34 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DashArea" unique_id=734685663]
 shape = SubResource("CircleShape2D_pj23d")
 
-[node name="Visuals" type="Node2D" parent="." unique_id=482335871]
+[node name="VisualContainer" type="Node2D" parent="." unique_id=1776760722]
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Visuals" unique_id=679222513]
+[node name="Visuals" type="Node2D" parent="VisualContainer" unique_id=482335871]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="VisualContainer/Visuals" unique_id=679222513]
 modulate = Color(0, 0.43137255, 1, 1)
 position = Vector2(15.75, 0)
 scale = Vector2(32.5, 8)
 mesh = SubResource("QuadMesh_p7o00")
 
-[node name="Body" type="MeshInstance2D" parent="Visuals" unique_id=943960601]
+[node name="Body" type="MeshInstance2D" parent="VisualContainer/Visuals" unique_id=943960601]
 scale = Vector2(32.53629, 32.500008)
 mesh = SubResource("SphereMesh_p7o00")
 
-[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1515697722]
+[node name="PointLight2D" type="PointLight2D" parent="VisualContainer" unique_id=1515697722]
 scale = Vector2(1.9999999, 1.9999999)
 blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("4_vll7h")
 
-[node name="PointLight2D2" type="PointLight2D" parent="." unique_id=1829727804]
+[node name="PointLight2D2" type="PointLight2D" parent="VisualContainer" unique_id=1829727804]
 position = Vector2(-3.8146973e-06, 0)
 scale = Vector2(16.727, 12)
 blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("5_q3q5s")
 
-[node name="HitBox" type="Area2D" parent="." unique_id=266288771]
+[node name="HitBox" type="Area2D" parent="VisualContainer" unique_id=266288771]
 collision_layer = 64
 collision_mask = 32
 script = ExtResource("6_u4e55")
@@ -124,17 +127,17 @@ attackDamage = 1
 metadata/_custom_type_script = "uid://dmhyvv3i0gwk4"
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1365776044]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisualContainer/HitBox" unique_id=1365776044]
 position = Vector2(16, 0)
 shape = SubResource("CircleShape2D_wew43")
 
-[node name="visionCone" type="Area2D" parent="." unique_id=464785541]
+[node name="visionCone" type="Area2D" parent="VisualContainer" unique_id=464785541]
 scale = Vector2(0.9999998, 0.9999999)
 collision_layer = 2
 collision_mask = 13
 metadata/_edit_lock_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="visionCone" unique_id=2138071926]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisualContainer/visionCone" unique_id=2138071926]
 polygon = PackedVector2Array(856.0002, -288.00003, 24.000006, -24.000004, 0, -56.000008, -24.000006, 0, 0, 56.000008, 24.000006, 24.000004, 840.0002, 264.00003, 888.0002, 80.00001, 896.00024, 0, 896.00024, -96.000015)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1542579118]
