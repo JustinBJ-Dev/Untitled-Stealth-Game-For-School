@@ -8,10 +8,12 @@ extends CharacterBody2D
 @export var detectionCast : RayCast2D
 @export var detectionArea : Area2D
 @export var visual : Node2D
+@export var visualContainer : Node2D
 @export var stateMachine : StateMachine
 @export var tookHit_State : State
 @export var hitBox : HitBox
 @export_category("Propertires")
+@export var visualRotation : float = 0
 @export var SPEED : int = 100
 
 
@@ -21,11 +23,12 @@ var player_node : player
 var navigating : bool = true
 
 func _ready() -> void:
+	visualContainer.global_rotation = deg_to_rad(visualRotation)
 	player_node = get_tree().get_first_node_in_group("player")
+	
 
 func _physics_process(delta: float) -> void:
 	$Label.text = str($StateMachine.active_state)
-	
 	
 	detectionCast.target_position = player_node.global_position - self.global_position
 	detect_player()
