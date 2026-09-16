@@ -33,6 +33,7 @@ var direction
 func _ready() -> void:
 	line = Line2D.new()
 	add_child(line)
+	line.z_index = -1
 	line.modulate = Color(0.0, 0.431, 1.0)
 	line.width = 3
 	
@@ -102,7 +103,7 @@ func shoot() -> void:
 	temp.set("timer_Waittime", 100)
 	temp.set("global_position", enemy_.global_position)
 	temp.set("area_direction", direction)
-	temp.set("rotation", enemy_.visual.rotation)
+	temp.set("rotation", enemy_.visual.rotation + deg_to_rad(enemy_.visualRotation))
 	enemy_.add_sibling(temp)
 
 func cooldownTimeout() -> void:

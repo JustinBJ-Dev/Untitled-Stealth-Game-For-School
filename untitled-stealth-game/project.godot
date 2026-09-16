@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Untitled Stealth Game"
-run/main_scene="uid://bccm00g6m5xoe"
+run/main_scene="uid://gbjgahhrqigk"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SceneLoader="*uid://lef31tuj6fg4"
+LevelStats="*uid://do0epvt5uihe6"
 
 [display]
 

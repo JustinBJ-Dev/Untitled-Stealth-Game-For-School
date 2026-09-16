@@ -86,6 +86,7 @@ metadata/_custom_type_script = "uid://b5lqognjyej6y"
 collision_mask = 9
 
 [node name="DashArea" type="Area2D" parent="." unique_id=1430133035]
+visible = false
 collision_mask = 9
 metadata/_edit_lock_ = true
 
@@ -93,6 +94,7 @@ metadata/_edit_lock_ = true
 shape = SubResource("CircleShape2D_pj23d")
 
 [node name="VisualContainer" type="Node2D" parent="." unique_id=1776760722]
+z_index = 1
 
 [node name="Visuals" type="Node2D" parent="VisualContainer" unique_id=482335871]
 
@@ -165,6 +167,7 @@ metadata/_edit_lock_ = true
 shape = SubResource("CapsuleShape2D_hxrvi")
 
 [node name="SoundArea" type="Area2D" parent="." unique_id=817261145]
+visible = false
 collision_layer = 2
 script = ExtResource("9_yigcc")
 metadata/_custom_type_script = "uid://1luamwpusv0q"

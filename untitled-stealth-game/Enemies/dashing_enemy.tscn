@@ -34,7 +34,7 @@ height = 48.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_t5fij"]
 radius = 384.0
 
-[node name="dashingEnemy" type="CharacterBody2D" unique_id=1369649150 node_paths=PackedStringArray("nav2d", "detectionCast", "detectionArea", "visual", "stateMachine", "tookHit_State", "hitBox")]
+[node name="dashingEnemy" type="CharacterBody2D" unique_id=1369649150 node_paths=PackedStringArray("nav2d", "detectionCast", "detectionArea", "visual", "visualContainer", "stateMachine", "tookHit_State", "hitBox")]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_ghv5c")
@@ -42,6 +42,7 @@ nav2d = NodePath("NavigationAgent2D")
 detectionCast = NodePath("detectionCast")
 detectionArea = NodePath("Visuals/visionCone")
 visual = NodePath("Visuals")
+visualContainer = NodePath("Visuals")
 stateMachine = NodePath("StateMachine")
 tookHit_State = NodePath("StateMachine/TookHit")
 hitBox = NodePath("Visuals/HitBox")
@@ -110,6 +111,7 @@ collision_mask = 9
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DashArea" unique_id=734685663]
+visible = false
 shape = SubResource("CircleShape2D_pj23d")
 
 [node name="Visuals" type="Node2D" parent="." unique_id=482335871]

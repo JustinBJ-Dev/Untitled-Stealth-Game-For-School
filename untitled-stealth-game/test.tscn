@@ -84,14 +84,10 @@ metadata/_edit_lock_ = true
 [node name="dashingEnemy" parent="Partol/PartolLogic" unique_id=1369649150 node_paths=PackedStringArray("partol_path") instance=ExtResource("2_8uh7m")]
 position = Vector2(1024, 192)
 partol_path = NodePath("..")
-
-[node name="Visuals" parent="Partol/PartolLogic/dashingEnemy" index="5" unique_id=482335871]
-rotation = 3.1415927
+visualRotation = 180.0
 
 [node name="Item" parent="." unique_id=1206623203 instance=ExtResource("7_vbegm")]
 position = Vector2(344, 240)
 
 [node name="Star" parent="." unique_id=1702600007 instance=ExtResource("8_ehkex")]
 position = Vector2(1040, 414)
-
-[editable path="Partol/PartolLogic/dashingEnemy"]

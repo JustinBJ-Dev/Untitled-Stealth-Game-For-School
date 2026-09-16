@@ -18,9 +18,11 @@ source_geometry_mode = 1
 source_geometry_group_name = &"navigation_collision"
 agent_radius = 24.0
 
-[node name="BaseLevel" type="Node2D" unique_id=532202032 node_paths=PackedStringArray("door")]
+[node name="BaseLevel" type="Node2D" unique_id=532202032 node_paths=PackedStringArray("door", "background")]
 script = ExtResource("1_f68xm")
 door = NodePath("Door")
+background = NodePath("Sprite2D")
+NextScene = &"uid://c50vgqfbiw2nu"
 metadata/_edit_lock_ = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=251905576]
@@ -29,6 +31,7 @@ metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=768266200]
 modulate = Color(0.7387694, 0.58814853, 0.9745365, 1)
+z_index = -2
 position = Vector2(552, 312)
 scale = Vector2(1500, 1500)
 texture = ExtResource("3_g2b43")
@@ -65,10 +68,10 @@ metadata/_edit_lock_ = true
 position = Vector2(-112, 352)
 
 [node name="Star" parent="." unique_id=1702600007 instance=ExtResource("9_4wmhd")]
-position = Vector2(112, 96)
+position = Vector2(128, 584)
 
 [node name="Star2" parent="." unique_id=1594615601 instance=ExtResource("9_4wmhd")]
-position = Vector2(112, 563)
+position = Vector2(128, 128)
 
 [node name="Star3" parent="." unique_id=263491123 instance=ExtResource("9_4wmhd")]
 position = Vector2(1024, 360)
