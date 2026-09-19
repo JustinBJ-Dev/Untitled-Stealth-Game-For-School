@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bshvkkqg3lixw" path="res://square.png" id="2_6rvu2"]
 [ext_resource type="TileSet" uid="uid://b413unu3axh5k" path="res://Art/base_tile_set.tres" id="3_hsahd"]
 [ext_resource type="PackedScene" uid="uid://b06d0buy11qhi" path="res://Entitles/door.tscn" id="4_s6haw"]
+[ext_resource type="PackedScene" uid="uid://crefdijvsist3" path="res://Entitles/barrier.tscn" id="5_diqa7"]
 [ext_resource type="PackedScene" uid="uid://b2huk5v86713o" path="res://Player/player.tscn" id="5_qs662"]
 [ext_resource type="Script" uid="uid://h4i2gpigi1o7" path="res://addons/Partol Points Plugin/Partol.gd" id="6_4a30c"]
 [ext_resource type="PackedScene" uid="uid://d2gkci8gyruaw" path="res://addons/Partol Points Plugin/partol_logic.tscn" id="7_col7b"]
@@ -12,8 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://b5hn5guoojx3x" path="res://Entitles/star.tscn" id="9_qdbm2"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_0rg8l"]
-vertices = PackedVector2Array(1048, 584, 1128, 624, 664, 624, 808, 584, 1048, 136, 1048, 56, 1128, 24, 664, 24, 808, 56, 664, 552, 664, 88, 808, 136, 664, 536, 664, 104, 808, 504, 472, 344, 472, 24, 552, 24, 552, 88, 552, 536, 552, 552, 552, 624, 472, 624, 472, 360, 552, 104, 360, 360, 360, 624, 24, 624, 24, 24, 360, 24, 360, 344, 1048, 504)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 1), PackedInt32Array(7, 6, 5, 8), PackedInt32Array(3, 2, 9), PackedInt32Array(10, 7, 8, 11), PackedInt32Array(12, 13, 14, 3), PackedInt32Array(12, 3, 9), PackedInt32Array(15, 16, 17, 18), PackedInt32Array(19, 12, 9, 20), PackedInt32Array(20, 21, 22, 23), PackedInt32Array(19, 20, 23), PackedInt32Array(24, 19, 23, 15), PackedInt32Array(25, 26, 27, 28), PackedInt32Array(28, 29, 30), PackedInt32Array(25, 28, 30), PackedInt32Array(25, 30, 15, 23), PackedInt32Array(24, 15, 18), PackedInt32Array(24, 18, 10, 13), PackedInt32Array(13, 10, 11, 14), PackedInt32Array(14, 11, 4, 31), PackedInt32Array(31, 4, 1), PackedInt32Array(31, 1, 0)])
+vertices = PackedVector2Array(1048, 584, 1128, 624, 664, 624, 808, 584, 1048, 152, 1048, 72, 1128, 24, 664, 24, 808, 72, 984, 408, 1048, 488, 808, 488, 872, 408, 664, 88, 808, 152, 664, 536, 664, 552, 872, 232, 664, 104, 472, 344, 472, 24, 552, 24, 552, 88, 552, 536, 552, 552, 552, 624, 472, 624, 472, 360, 552, 104, 360, 360, 360, 624, 24, 624, 24, 24, 360, 24, 360, 344, 984, 232)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 1), PackedInt32Array(7, 6, 5, 8), PackedInt32Array(9, 10, 11, 12), PackedInt32Array(13, 7, 8, 14), PackedInt32Array(15, 11, 3, 16), PackedInt32Array(17, 12, 11, 15, 18, 14), PackedInt32Array(3, 2, 16), PackedInt32Array(19, 20, 21, 22), PackedInt32Array(23, 15, 16, 24), PackedInt32Array(24, 25, 26, 27), PackedInt32Array(23, 24, 27), PackedInt32Array(28, 23, 27, 19), PackedInt32Array(29, 30, 31, 32), PackedInt32Array(32, 33, 34), PackedInt32Array(29, 32, 34), PackedInt32Array(29, 34, 19, 27), PackedInt32Array(28, 19, 22), PackedInt32Array(28, 22, 13, 18), PackedInt32Array(18, 13, 14), PackedInt32Array(17, 14, 4, 35), PackedInt32Array(35, 4, 1, 10), PackedInt32Array(1, 0, 10), PackedInt32Array(35, 10, 9)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(0, 0, 1160, 0, 1152, 648, 0, 648)])
 source_geometry_mode = 1
 source_geometry_group_name = &"navigation_collision"
@@ -21,13 +22,29 @@ agent_radius = 24.0
 
 [node name="BaseLevel" type="Node2D" unique_id=532202032 node_paths=PackedStringArray("door", "background")]
 script = ExtResource("1_o0juq")
-door = NodePath("Door")
+door = NodePath("Level/Door")
 background = NodePath("Sprite2D")
 NextScene = &"uid://b7ryndpyg3xnr"
 metadata/_edit_lock_ = true
 
+[node name="Level" type="Node2D" parent="." unique_id=276300041]
+position = Vector2(72, 352)
+
+[node name="Barrier" parent="Level" unique_id=1555373872 instance=ExtResource("5_diqa7")]
+position = Vector2(344, 0)
+scale = Vector2(1, 4.08)
+
+[node name="Barrier2" parent="Level" unique_id=308016964 instance=ExtResource("5_diqa7")]
+position = Vector2(536, -256)
+scale = Vector2(1, 7.046399)
+
+[node name="Barrier3" parent="Level" unique_id=2043533376 instance=ExtResource("5_diqa7")]
+position = Vector2(536, 200)
+scale = Vector2(1, 7.046399)
+
+[node name="Door" parent="Level" unique_id=466779108 instance=ExtResource("4_s6haw")]
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=768266200]
-visible = false
 modulate = Color(0.7387694, 0.58814853, 0.9745365, 1)
 z_index = -2
 position = Vector2(552, 312)
@@ -40,7 +57,6 @@ color = Color(0.27569968, 0.27569968, 0.27569965, 1)
 metadata/_edit_lock_ = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1245080922]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_0rg8l")
 metadata/_edit_lock_ = true
 
@@ -49,9 +65,6 @@ tile_map_data = PackedByteArray("AABIAAAAAQABAAAAAABIAAEAAQABAAAAAABIAAIAAQABAAA
 tile_set = ExtResource("3_hsahd")
 navigation_visibility_mode = 1
 metadata/_edit_lock_ = true
-
-[node name="Door" parent="." unique_id=466779108 instance=ExtResource("4_s6haw")]
-position = Vector2(72, 352)
 
 [node name="player" parent="." unique_id=1967735014 instance=ExtResource("5_qs662")]
 position = Vector2(88, 264)
@@ -103,7 +116,7 @@ visualRotation = 90.0
 [node name="Itens" type="Node" parent="." unique_id=742975273]
 
 [node name="Item" parent="Itens" unique_id=1206623203 instance=ExtResource("8_wrv0u")]
-position = Vector2(416, 352)
+position = Vector2(320, 357)
 
 [node name="Star" parent="." unique_id=1702600007 instance=ExtResource("9_qdbm2")]
 position = Vector2(1088, 328)

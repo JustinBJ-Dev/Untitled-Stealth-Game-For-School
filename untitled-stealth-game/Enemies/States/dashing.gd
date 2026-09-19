@@ -34,7 +34,7 @@ func physics_update(delta: float) -> void:
 		switch_state.emit(Idle)
 
 func timeout() -> void:
-	if enemy_.global_position.distance_to(enemy_.target.global_position) > 64:
+	if enemy_.global_position.distance_to(enemy_.target.global_position) > 194:
 		switch_state.emit(Idle)
 
 func exit_state() -> void:
